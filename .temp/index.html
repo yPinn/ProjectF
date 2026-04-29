@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>法克娛樂 FUCK Entertainment</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ══ 星空 canvas（全頁固定背景） ══ -->
+    <canvas id="starfield"></canvas>
+
+    <!-- ══ SPLASH：全螢幕開場 ══ -->
+    <section class="splash" id="splash">
+      <div class="splash-bg-grid"></div>
+      <div class="splash-glow-top"></div>
+      <div class="splash-glow-bottom"></div>
+      <div class="splash-particles" id="particles"></div>
+
+      <div class="splash-content">
+        <img class="splash-logo" src="images/logo.png" alt="法克娛樂 FUCK Entertainment" />
+        <div class="splash-tag">SINCE 2026 ／ TAIWAN</div>
+        <h1 class="splash-title">
+          <span class="splash-title-zh">法克娛樂</span>
+          <span class="splash-title-en">FUCK ENTERTAINMENT</span>
+        </h1>
+        <p class="splash-sub">頂級實況娛樂經紀公司　／　TOP TIER STREAMER AGENCY</p>
+        <div class="splash-divider">
+          <div class="splash-line"></div>
+          <div class="splash-diamond"></div>
+          <div class="splash-line"></div>
+        </div>
+        <div class="splash-scroll-hint">
+          <div class="scroll-arrow"></div>
+          <span>向下滑動</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 關於我們 ABOUT ══ -->
+    <section class="about-section" id="aboutSection">
+      <div class="about-inner">
+        <div class="about-eyebrow reveal">ABOUT ／ 關於我們</div>
+        <h2 class="about-title reveal">
+          <span class="about-title-line">不只是直播</span>
+          <span class="about-title-line accent">是一種生活方式</span>
+        </h2>
+        <div class="about-body">
+          <div class="about-manifesto reveal">
+            <p>法克娛樂不是公司，是一群人決定認真對待這件事之後的結果。</p>
+            <p>
+              我們從深夜的開台、亂打的遊戲、說到忘記時間的廢話裡長出來——沒有劇本，沒有人設，只有一個共識：就是要真實。
+            </p>
+            <p>
+              觀眾進來不是來看表演的，是來找一個不用裝的地方。這裡的每一個人都是這樣，打得好的時候嗨，打爛的時候也不遮，然後隔天繼續。
+            </p>
+            <p>法克娛樂存在的理由很簡單——因為有些人就是要這樣。</p>
+          </div>
+          <div class="about-stats">
+            <div class="about-stat reveal">
+              <div class="stat-number" data-target="8">0</div>
+              <div class="stat-label">核心成員</div>
+            </div>
+            <div class="about-stat reveal">
+              <div class="stat-number" data-target="2026">0</div>
+              <div class="stat-label">創立年份</div>
+            </div>
+            <div class="about-stat reveal">
+              <div class="stat-number" data-target="24">0</div>
+              <div class="stat-label">小時不斷電</div>
+            </div>
+            <div class="about-stat reveal">
+              <div class="stat-number" data-target="∞">∞</div>
+              <div class="stat-label">廢話無上限</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-tags reveal">
+          <span class="about-chip">Taiwan Based</span>
+          <span class="about-chip">Twitch</span>
+          <span class="about-chip">No Script</span>
+          <span class="about-chip">Real People</span>
+          <span class="about-chip">Since 2026</span>
+        </div>
+      </div>
+      <div class="about-bg-deco" aria-hidden="true">
+        <div class="deco-ring deco-ring--1"></div>
+        <div class="deco-ring deco-ring--2"></div>
+        <div class="deco-slash"></div>
+      </div>
+    </section>
+
+    <!-- ══ 主內容 ══ -->
+    <main class="main-content" id="mainContent">
+      <!-- 最強實況主 -->
+      <section class="card-section">
+        <div class="section-label section-label--large reveal">
+          <h2><strong>最強實況主</strong>　ROSTER</h2>
+        </div>
+        <div class="streamers-grid" id="foundersGrid"></div>
+      </section>
+
+      <!-- 亂源 -->
+      <section class="card-section">
+        <div class="section-label section-label--large reveal">
+          <h2><strong>亂源</strong>　VIEWER</h2>
+        </div>
+        <div class="streamers-grid" id="viewersGrid"></div>
+      </section>
+
+      <footer>© 2026 法克娛樂 FUCK ENTERTAINMENT &nbsp;／&nbsp; ALL RIGHTS RESERVED</footer>
+    </main>
+
+    <!-- ══ Modal ══ -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" id="modal">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div class="modal-accent-bar" id="modalAccentBar"></div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

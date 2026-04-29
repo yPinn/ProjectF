@@ -1,0 +1,551 @@
+/* HeroSliderLayout.css
+   Scoped to .hsl-root to avoid global pollution.
+   Import once: import './HeroSliderLayout.css'
+*/
+
+/* ── Fonts ── */
+@font-face {
+  font-family: 'Insomnia';
+  src: url('https://www.yudiz.com/codepen/valorant-characters/Insomnia.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'VALORANT';
+  src: url('https://www.yudiz.com/codepen/valorant-characters/Valorant.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* ── CSS Variables ── */
+.hsl-root {
+  --hsl-font-body: 'VALORANT', sans-serif;
+  --hsl-font-display: 'Insomnia', sans-serif;
+
+  /* Purple theme (default) */
+  --hsl-purple-text: #ccc4ed;
+  --hsl-purple-muted: rgba(187, 177, 231, 0.62);
+  --hsl-purple-accent: #6826ff;
+  --hsl-purple-mid: #9f91de;
+  --hsl-purple-light: #a395df;
+
+  /* Orange theme */
+  --hsl-orange-text: #9a7723;
+  --hsl-orange-bright: #eaa742;
+  --hsl-orange-border: #6b5536;
+  --hsl-orange-light: #ffe0b7;
+  --hsl-orange-gold: #dfa650;
+  --hsl-orange-pale: #ffca79;
+
+  /* Green theme */
+  --hsl-green-text: #038c36;
+  --hsl-green-bright: #04bc49;
+  --hsl-green-light: #d4ffe4;
+}
+
+/* ── Root container ── */
+.hsl-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0a14;
+  font-family: var(--hsl-font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--hsl-purple-text);
+}
+
+/* ── Rain ── */
+.hsl-rain {
+  position: absolute;
+  width: 3px;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.hsl-rain:nth-child(1) {
+  animation: hsl-rain 9s 1s infinite;
+  left: 5%;
+}
+.hsl-rain:nth-child(2) {
+  animation: hsl-rain 7s 4s infinite;
+  left: 15%;
+}
+.hsl-rain:nth-child(3) {
+  animation: hsl-rain 8s 0s infinite;
+  left: 28%;
+}
+.hsl-rain:nth-child(4) {
+  animation: hsl-rain 6s 3s infinite;
+  left: 42%;
+}
+.hsl-rain:nth-child(5) {
+  animation: hsl-rain 9s 7s infinite;
+  left: 58%;
+}
+.hsl-rain:nth-child(6) {
+  animation: hsl-rain 5s 2s infinite;
+  left: 70%;
+}
+.hsl-rain:nth-child(7) {
+  animation: hsl-rain 8s 5s infinite;
+  left: 82%;
+}
+.hsl-rain:nth-child(8) {
+  animation: hsl-rain 7s 9s infinite;
+  left: 92%;
+}
+.hsl-rain:nth-child(9) {
+  animation: hsl-rain 6s 0s infinite;
+  left: 35%;
+}
+.hsl-rain:nth-child(10) {
+  animation: hsl-rain 9s 6s infinite;
+  left: 65%;
+}
+@keyframes hsl-rain {
+  from {
+    top: -8%;
+    opacity: 0.45;
+  }
+  to {
+    top: 108%;
+    opacity: 0;
+  }
+}
+
+/* ── Header ── */
+.hsl-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.hsl-header-logo img {
+  width: 56px;
+  height: 56px;
+  display: block;
+}
+
+.hsl-header-nav ul {
+  display: flex;
+  gap: 64px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hsl-header-nav ul li a {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--hsl-purple-text);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.hsl-header-nav ul li a:hover,
+.hsl-header-nav ul li.active a {
+  color: #fff;
+}
+
+/* Header theme overrides */
+.hsl-root[data-theme='orange'] .hsl-header-nav ul li a {
+  color: var(--hsl-orange-text);
+}
+.hsl-root[data-theme='orange'] .hsl-header-nav ul li a:hover,
+.hsl-root[data-theme='orange'] .hsl-header-nav ul li.active a {
+  color: var(--hsl-orange-bright);
+}
+
+.hsl-root[data-theme='green'] .hsl-header-nav ul li a {
+  color: var(--hsl-green-text);
+}
+.hsl-root[data-theme='green'] .hsl-header-nav ul li a:hover,
+.hsl-root[data-theme='green'] .hsl-header-nav ul li.active a {
+  color: var(--hsl-green-bright);
+}
+
+/* ── Slide ── */
+.hsl-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s ease;
+}
+.hsl-slide.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Slide inner columns ── */
+.hsl-slide-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 90px;
+  gap: 16px;
+}
+
+/* Left column */
+.hsl-col-left {
+  width: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  flex-shrink: 0;
+}
+.hsl-col-left h6 {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 12px;
+  letter-spacing: 14px;
+  font-weight: 400;
+  color: var(--hsl-purple-light);
+  text-transform: uppercase;
+  margin: 0;
+}
+.hsl-col-left img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+}
+
+/* Left column theme overrides */
+.hsl-root[data-theme='orange'] .hsl-col-left h6 {
+  color: var(--hsl-orange-text);
+}
+.hsl-root[data-theme='green'] .hsl-col-left h6 {
+  color: var(--hsl-green-text);
+}
+
+/* Center character image column */
+.hsl-col-image {
+  width: 50%;
+  align-self: flex-end;
+  max-height: 87vh;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+}
+.hsl-col-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 87vh;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  transform: translateX(-6%);
+  opacity: 0;
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease;
+}
+.hsl-slide.is-active .hsl-col-image img {
+  transform: translateX(-6%);
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+/* reset for inactive slides */
+.hsl-slide:not(.is-active) .hsl-col-image img {
+  transform: translateX(5%);
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+/* Right content column */
+.hsl-col-content {
+  width: 30%;
+  padding-top: 60px;
+  flex-shrink: 0;
+}
+
+/* role subtitle */
+.hsl-role {
+  font-size: 15px;
+  letter-spacing: 10px;
+  color: var(--hsl-purple-mid);
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+/* character name */
+.hsl-name {
+  font-family: var(--hsl-font-display);
+  font-size: 82px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 5px;
+  background: linear-gradient(180deg, #6d4be7 0%, #998be5 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-bottom: 24px;
+  display: inline-flex;
+  margin: 0;
+}
+
+/* role / name theme overrides */
+.hsl-root[data-theme='orange'] .hsl-role {
+  color: var(--hsl-orange-text);
+}
+.hsl-root[data-theme='orange'] .hsl-name {
+  background: linear-gradient(180deg, var(--hsl-orange-gold) 0%, var(--hsl-orange-pale) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hsl-root[data-theme='green'] .hsl-role {
+  color: var(--hsl-green-text);
+}
+.hsl-root[data-theme='green'] .hsl-name {
+  background: linear-gradient(180deg, var(--hsl-green-bright) 0%, var(--hsl-green-text) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Info box */
+.hsl-info-box {
+  border: 1px solid var(--hsl-purple-accent);
+  background: linear-gradient(180deg, rgba(68, 45, 142, 0.2) 0%, rgba(82, 51, 180, 0.09) 100%);
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.hsl-info-box-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.hsl-info-box-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.hsl-info-type {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--hsl-purple-text);
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  margin: 0;
+}
+.hsl-info-desc {
+  font-size: 11px;
+  line-height: 17px;
+  color: var(--hsl-purple-muted);
+  margin: 0;
+}
+
+/* Info box theme overrides */
+.hsl-root[data-theme='orange'] .hsl-info-box {
+  border-color: var(--hsl-orange-border);
+  background: linear-gradient(180deg, rgba(101, 75, 37, 0.13) 0%, rgba(246, 186, 98, 0.05) 100%);
+}
+.hsl-root[data-theme='orange'] .hsl-info-type {
+  color: var(--hsl-orange-bright);
+}
+.hsl-root[data-theme='orange'] .hsl-info-desc {
+  color: var(--hsl-orange-text);
+}
+
+.hsl-root[data-theme='green'] .hsl-info-box {
+  border-color: var(--hsl-green-text);
+  background: linear-gradient(180deg, rgba(2, 157, 56, 0.08) 0%, rgba(6, 167, 61, 0.05) 100%);
+}
+.hsl-root[data-theme='green'] .hsl-info-type {
+  color: var(--hsl-green-bright);
+}
+.hsl-root[data-theme='green'] .hsl-info-desc {
+  color: var(--hsl-green-text);
+}
+
+/* Abilities grid */
+.hsl-abilities {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 40px;
+}
+.hsl-ability {
+  flex: 1;
+  border: 1px solid var(--hsl-purple-accent);
+}
+.hsl-ability-img {
+  padding: 16px;
+  text-align: center;
+}
+.hsl-ability-img img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+.hsl-ability-key {
+  font-size: 13px;
+  line-height: 15px;
+  color: #bbb1e7;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px;
+  border-top: 1px solid var(--hsl-purple-accent);
+  background: linear-gradient(180deg, rgba(68, 45, 142, 0.2) 0%, rgba(82, 51, 180, 0.09) 100%);
+  margin: 0;
+}
+
+/* Abilities theme overrides */
+.hsl-root[data-theme='orange'] .hsl-ability {
+  border-color: var(--hsl-orange-border);
+}
+.hsl-root[data-theme='orange'] .hsl-ability-key {
+  border-top-color: var(--hsl-orange-border);
+  background: linear-gradient(180deg, rgba(130, 99, 55, 0.13) 0%, rgba(221, 170, 95, 0.17) 100%);
+  color: #c4893b;
+}
+.hsl-root[data-theme='green'] .hsl-ability {
+  border-color: #01ab3f;
+}
+.hsl-root[data-theme='green'] .hsl-ability-key {
+  border-top-color: rgba(1, 171, 63, 0);
+  background: linear-gradient(180deg, rgba(2, 157, 56, 0.08) 0%, rgba(6, 167, 61, 0.01) 100%);
+  color: var(--hsl-green-text);
+}
+
+/* CTA button */
+.hsl-cta {
+  display: inline-block;
+  position: relative;
+  width: 270px;
+  height: 60px;
+  background: url('https://www.yudiz.com/codepen/valorant-characters/button-bg.svg') no-repeat
+    center / cover;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+.hsl-cta span {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  font-family: var(--hsl-font-body);
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #ccc4ed;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.hsl-root[data-theme='orange'] .hsl-cta {
+  background-image: url('https://www.yudiz.com/codepen/valorant-characters/button-bg-2.svg');
+}
+.hsl-root[data-theme='orange'] .hsl-cta span {
+  color: var(--hsl-orange-light);
+}
+.hsl-root[data-theme='green'] .hsl-cta {
+  background-image: url('https://www.yudiz.com/codepen/valorant-characters/button-bg-3.svg');
+}
+.hsl-root[data-theme='green'] .hsl-cta span {
+  color: var(--hsl-green-light);
+}
+
+/* Custom CTA image override (per-slide) */
+.hsl-cta[data-custom-bg='true'] {
+  background-image: var(--hsl-cta-custom-bg) !important;
+}
+
+/* ── Right nav dots ── */
+.hsl-nav-dots {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 200;
+}
+.hsl-nav-dot {
+  cursor: pointer;
+  opacity: 0.4;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+.hsl-nav-dot.is-active {
+  opacity: 1;
+  transform: scale(1.12);
+}
+.hsl-nav-dot img {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+/* ── Keyboard hint ── */
+.hsl-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.18);
+  text-transform: uppercase;
+  z-index: 100;
+  user-select: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1300px) {
+  .hsl-col-image {
+    width: 46%;
+  }
+  .hsl-col-content {
+    width: 34%;
+  }
+  .hsl-col-left {
+    width: 7%;
+  }
+  .hsl-name {
+    font-size: 60px;
+  }
+}
+@media (max-width: 1024px) {
+  .hsl-col-left {
+    display: none;
+  }
+  .hsl-col-image {
+    width: 48%;
+  }
+  .hsl-col-content {
+    width: 44%;
+  }
+  .hsl-name {
+    font-size: 52px;
+  }
+  .hsl-cta {
+    width: 220px;
+    height: 50px;
+  }
+}
