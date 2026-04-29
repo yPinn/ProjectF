@@ -1,0 +1,16 @@
+.canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--z-bg);
+  opacity: 0;
+  animation: canvasFadeIn 1.2s ease forwards;
+}
+
+@keyframes canvasFadeIn {
+  to {
+    opacity: 1;
+  }
+}

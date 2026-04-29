@@ -1,0 +1,90 @@
+[
+  {
+    "name": "一韓小串文",
+    "username": "lilhanwen3377",
+    "photo": "/images/members/lilhanwen3377.png",
+    "title": "法克娛樂 會長",
+    "color": "#a169f0",
+    "bio": "法克娛樂的起點，也是整個生態圈的核心。從一個人開台到拉起一整批志同道合的人，他建立的不只是頻道，而是一種氛圍——沒有人設、沒有劇本，觀眾進來就是朋友。深夜開台、講到忘記時間，這種真實感是任何製作都複製不了的東西。",
+    "tags": ["LOL", "APEX", "Valorant", "TFT"],
+    "twitch": "https://www.twitch.tv/lilhanwen3377",
+    "audio": "/audio/lilhanwen3377.mp3"
+  },
+  {
+    "name": "麻辣布丁狗",
+    "username": "winsyi",
+    "photo": "/images/members/winsyi.png",
+    "title": "法克娛樂 副會長",
+    "color": "#F0DD48",
+    "bio": "Valorant 場上走位沉穩、判斷精準，是那種讓隊伍在亂局中保持節奏的人。歐卡司機的身份在直播裡展現出另一面——半夜跨越虛擬歐洲大陸，沉浸感十足。法克娛樂副會長，頭銜背後是真正靠實力和信任站到這個位置的人。",
+    "tags": ["Valorant", "歐卡"],
+    "twitch": "https://www.twitch.tv/winsyi",
+    "audio": "/audio/winsyi.mp3"
+  },
+  {
+    "name": "黃金酷辣雞腿排",
+    "username": "yyo277",
+    "photo": "/images/members/yyo277.png",
+    "title": "法克娛樂 最美公關",
+    "color": "#CF7B5B",
+    "bio": "LOL、Valorant 全都玩，TFT 排陣有自己一套邏輯。法克娛樂的公關形象擔當，不只是外型，更是那種讓人在頻道裡感覺舒服、想留下來的氣質。他的存在讓整個頻道的氛圍更好看了一個等級。",
+    "tags": ["LOL", "Valorant", "TFT"],
+    "twitch": "https://www.twitch.tv/yyo277",
+    "audio": "/audio/yyo277.mp3"
+  },
+  {
+    "name": "蓀蓀楠瓜",
+    "username": "sunsun_pumpkin",
+    "photo": "/images/members/sunsun_pumpkin.png",
+    "title": "法克娛樂 仙女下凡",
+    "color": "#e97e1b",
+    "bio": "法克娛樂裡自帶一種獨特氣質的存在——舉止有素質、風格有辨識度，那種從容和優雅的感覺在直播圈裡完全少見。LOL、APEX、Valorant、CS2、三角洲、TFT、Minecraft、雀魂 全都是她的舞台，遊戲打起來有自己的節奏，看她打遊戲就像看一個很清楚自己在做什麼的人。開台的時候氣氛就是不一樣，說不上來，就是讓人想靜下來好好看。法克娛樂有她在，整個頻道的質感都往上走了一個層次。",
+    "tags": ["LOL", "Valorant", "CS2", "APEX", "三角洲", "TFT", "Minecraft", "雀魂"],
+    "twitch": "https://www.twitch.tv/sunsun_pumpkin",
+    "audio": "/audio/sunsun_pumpkin.mp3"
+  },
+  {
+    "name": "4泡芙拉",
+    "username": "puffsla",
+    "photo": "/images/members/puffsla.png",
+    "title": "法克娛樂 空氣檢測員",
+    "color": "#ff8fd8",
+    "bio": "本名歐仙堂，法克娛樂裡綽號最多、故事也最多的人。外號 Ｂ寶，喜歡在遊戲裡裝得很厲害、然後在最關鍵的時候送掉人頭。煙鬼身分讓他在緊張時刻的反應更加迷人——螢幕外一根菸，螢幕內一個操作，觀眾全場靜默。",
+    "tags": ["LOL", "APEX", "Valorant"],
+    "twitch": "https://www.twitch.tv/puffsla",
+    "audio": "/audio/puffsla.mp3"
+  },
+  {
+    "name": "我愛鄭雅賢",
+    "username": "mx_715",
+    "photo": "/images/members/mx_715.png",
+    "title": "法克娛樂 經紀人",
+    "color": "#bf5fff",
+    "bio": "法克娛樂的招募經紀人，負責把對的人拉進這個圈子——目前團隊裡的陣容有一半都是他的功勞。眼光精準、聊起人來頭頭是道，選人標準外人看不懂，但結果都會說話。LOL 跟 APEX 是他的主場，實力在團隊裡絕對數一數二，是那種你以為他只是在管事、結果上了遊戲直接給你一個下馬威的存在。",
+    "tags": ["LOL", "APEX", "TFT"],
+    "twitch": "https://www.twitch.tv/mx_715",
+    "audio": "/audio/mx_715.mp3"
+  },
+  {
+    "name": "大頭大頭大頭",
+    "username": "datou_cheng",
+    "photo": "/images/members/datou_cheng.png",
+    "title": "法克娛樂 老司機",
+    "color": "#00f5ff",
+    "bio": "頭很大，但裝的東西也很多。LOL 場上反應奇快、APEX 槍法時好時壞，Valorant 則是讓隊友又愛又恨的那種存在。開台風格不拘一格，笑點跟操作一樣難以預測。法克娛樂裡少數能靠一句話讓全場靜下來、又靠下一句話讓大家爆笑的人。",
+    "tags": ["LOL", "APEX", "Valorant", "歐卡", "BMW車主"],
+    "twitch": "https://www.twitch.tv/datou_cheng",
+    "audio": "/audio/datou_cheng.mp3"
+  },
+  {
+    "name": "酷酷的斜音梗",
+    "username": "coolhomophonic",
+    "photo": "/images/members/coolhomophonic.png",
+    "title": "法克娛樂 旗靈王",
+    "color": "#c58f6f",
+    "bio": "TFT多季宗師，S13菁英玩家，喜歡唱歌但很常翻車。",
+    "tags": ["LOL", "Valorant", "TFT"],
+    "twitch": "https://www.twitch.tv/coolhomophonic",
+    "audio": "/audio/coolhomophonic.mp3"
+  }
+]

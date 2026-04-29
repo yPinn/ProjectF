@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'jf-openhuninn';
+  src: url('/fonts/jf-openhuninn-2.1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Fonts */
+  --font-display: 'Rajdhani', 'Inter', sans-serif;
+  --font-body: 'jf-openhuninn', 'Inter', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+
+  /* Palette */
+  --palette-cyan-400: #00f5ff;
+  --palette-pink-500: #ff2d78;
+  --palette-purple-400: #bf5fff;
+  --palette-green-400: #39ff14;
+  --palette-gold-400: #ffd700;
+  --palette-navy-950: #04080f;
+  --palette-navy-900: #090e1c;
+  --palette-navy-800: #15213a;
+
+  /* Colors */
+  --color-accent: var(--palette-cyan-400);
+  --color-accent-pink: var(--palette-pink-500);
+  --color-accent-purple: var(--palette-purple-400);
+  --color-accent-green: var(--palette-green-400);
+  --color-accent-gold: var(--palette-gold-400);
+  --color-bg: var(--palette-navy-950);
+  --color-surface: var(--palette-navy-900);
+  --color-border: var(--palette-navy-800);
+  --color-text: #e8f0ff;
+  --color-muted: #4e5e7a;
+
+  /* Z-index */
+  --z-bg: 1;
+  --z-content: 10;
+  --z-modal: 2000;
+  --z-cursor: 99999;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Spacing — 4px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+
+  /* Type scale — 1.25 ratio */
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.563rem;
+  --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+  --text-3xl: 3.052rem;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}

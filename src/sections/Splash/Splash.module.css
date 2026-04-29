@@ -1,0 +1,240 @@
+.splash {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* ── Background grid ── */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 4s ease-in-out infinite;
+}
+
+.bgGrid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 7px,
+    rgba(0, 245, 255, 0.015) 7px,
+    rgba(0, 245, 255, 0.015) 8px
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* ── Glows ── */
+.glowTop {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(0, 245, 255, 0.13) 0%, transparent 65%);
+  pointer-events: none;
+  animation: glowPulseCenter 3s ease-in-out infinite;
+}
+
+.glowBottom {
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(191, 95, 255, 0.1) 0%, transparent 65%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out 1.5s infinite;
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: var(--z-content);
+  text-align: center;
+  padding: 0 var(--space-6);
+}
+
+.logo {
+  display: block;
+  margin: 0 auto var(--space-7, 28px);
+  height: clamp(100px, 10vw, 120px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(0, 245, 255, 0.45))
+    drop-shadow(0 0 40px rgba(0, 245, 255, 0.18));
+  opacity: 0;
+  animation: fadeSlideDown 0.8s 0.1s forwards;
+  animation-timing-function: var(--ease-out-expo, cubic-bezier(0.22, 1, 0.36, 1));
+  transition: filter 0.3s;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 28px rgba(0, 245, 255, 0.7)) drop-shadow(0 0 60px rgba(0, 245, 255, 0.3));
+}
+
+/* ── Tag pill ── */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.55em;
+  color: var(--color-accent);
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  padding: 5px 20px;
+  border-radius: 2px;
+  margin-bottom: var(--space-8);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeSlideDown 0.7s 0.3s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.tag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.15), transparent);
+  animation: tagShine 3s 1.2s ease-in-out infinite;
+}
+
+/* ── Title ── */
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.titleZh {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 14vw, 140px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow:
+    0 0 40px rgba(0, 245, 255, 0.5),
+    0 0 100px rgba(0, 245, 255, 0.2),
+    0 0 200px rgba(0, 245, 255, 0.1);
+  opacity: 0;
+  animation: titleBlast 0.9s 0.6s var(--ease-out-expo) forwards;
+  position: relative;
+}
+
+.titleZh::before,
+.titleZh::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.titleZh::before {
+  color: var(--color-accent);
+  animation: glitchTop 5s 2.5s ease-in-out infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  opacity: 0;
+}
+
+.titleZh::after {
+  color: var(--color-accent-pink);
+  animation: glitchBottom 5s 2.8s ease-in-out infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  opacity: 0;
+}
+
+.titleEn {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 3.5vw, 36px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.7);
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 1.1s ease forwards;
+}
+
+.sub {
+  font-size: clamp(10px, 1.4vw, 13px);
+  color: var(--color-muted);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--space-9);
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 1.4s ease forwards;
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 300px;
+  margin: 0 auto var(--space-12);
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 1.6s ease forwards;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.5), transparent);
+  animation: linePulse 3s 2s ease-in-out infinite;
+}
+
+.diamond {
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent);
+  transform: rotate(45deg);
+  box-shadow:
+    0 0 12px var(--color-accent),
+    0 0 24px rgba(0, 245, 255, 0.5);
+  animation: diamondPulse 1.5s 2s ease-in-out infinite;
+}
+
+/* ── Scroll hint ── */
+.scrollHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 2s ease forwards;
+}
+
+.scrollHint span {
+  font-size: 11px;
+  color: var(--color-muted);
+  letter-spacing: 0.3em;
+}
+
+.scrollArrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid rgba(0, 245, 255, 0.5);
+  border-bottom: 2px solid rgba(0, 245, 255, 0.5);
+  transform: rotate(45deg);
+  animation: arrowBounce 1.2s ease-in-out infinite;
+}

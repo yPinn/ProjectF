@@ -1,0 +1,272 @@
+/* Splash */
+@keyframes titleBlast {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glitch */
+@keyframes glitchTop {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateX(0);
+  }
+  91% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(-4px);
+  }
+  93% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(4px);
+  }
+  95% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(-2px);
+  }
+  97% {
+    opacity: 0;
+  }
+}
+
+@keyframes glitchBottom {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateX(0);
+  }
+  92% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(3px);
+  }
+  94% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(-3px);
+  }
+  96% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(1px);
+  }
+  98% {
+    opacity: 0;
+  }
+}
+
+/* Background */
+@keyframes gridPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulseCenter {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Particles */
+@keyframes particleFly {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(var(--drift));
+    opacity: 0;
+  }
+}
+
+/* Splash details */
+@keyframes tagShine {
+  0% {
+    left: -100%;
+  }
+  40%,
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes linePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes diamondPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 12px var(--color-accent),
+      0 0 24px rgba(0, 245, 255, 0.5);
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px var(--color-accent),
+      0 0 40px rgba(0, 245, 255, 0.7);
+    transform: rotate(45deg) scale(1.4);
+  }
+}
+
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(45deg) translateY(6px);
+    opacity: 1;
+  }
+}
+
+/* Card */
+@keyframes badgeShine {
+  0%,
+  60%,
+  100% {
+    left: -100%;
+  }
+  40% {
+    left: 150%;
+  }
+}
+
+@keyframes rippleOut {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Modal */
+@keyframes accentSweep {
+  from {
+    left: -60%;
+  }
+  to {
+    left: 160%;
+  }
+}
+
+@keyframes modalAvatarIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes modalNameIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes modalSectionIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+@keyframes footerLine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

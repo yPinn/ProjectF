@@ -1,0 +1,93 @@
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a,
+button,
+label,
+summary,
+input,
+select,
+textarea,
+[role='button'] {
+  touch-action: manipulation;
+}
+
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 245, 255, 0.2);
+}
+
+@media (pointer: fine) {
+  html,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  html,
+  body {
+    cursor: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+
+  a,
+  button,
+  [role='button'],
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    cursor: pointer !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

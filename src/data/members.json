@@ -1,0 +1,42 @@
+[
+  {
+    "name": "泥先生",
+    "username": "kkai0000",
+    "photo": "/images/members/kkai0000.png",
+    "color": "#525757",
+    "tags": ["LOL", "APEX"],
+    "twitch": "https://www.twitch.tv/kkai0000"
+  },
+  {
+    "name": "羅籟靶",
+    "username": "guanwei1mao666",
+    "photo": "/images/members/guanwei1mao666.png",
+    "color": "#eb34b4",
+    "tags": ["LOL", "APEX", "Valorant", "TFT", "R6"],
+    "twitch": "https://www.twitch.tv/guanwei1mao666"
+  },
+  {
+    "name": "の玥",
+    "username": "yueyue_qoq",
+    "photo": "/images/members/yueyue_qoq.png",
+    "color": "#7269f0",
+    "tags": ["Valorant超凡", "歌手", "法拉利車主"],
+    "twitch": "https://www.twitch.tv/yueyue_qoq"
+  },
+  {
+    "name": "愛傑克",
+    "username": "ijack932",
+    "photo": "/images/members/ijack932.png",
+    "color": "#a8ec8d",
+    "tags": ["忠實觀眾"],
+    "twitch": "https://www.twitch.tv/ijack932"
+  },
+  {
+    "name": "白上吹雪毛毛軟軟的",
+    "username": "kuroneko7777",
+    "photo": "/images/members/kuroneko7777.png",
+    "color": "#ffffff",
+    "tags": ["APEX", "CS2", "R6"],
+    "twitch": "https://www.twitch.tv/kuroneko7777"
+  }
+]

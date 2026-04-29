@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleFly linear infinite;
+  opacity: 0;
+}

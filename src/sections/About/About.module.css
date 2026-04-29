@@ -1,0 +1,342 @@
+.section {
+  position: relative;
+  z-index: var(--z-content);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 100px var(--space-6);
+  background: linear-gradient(180deg, var(--color-bg) 0%, #060c1a 40%, #040810 100%);
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  color: var(--color-accent);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  display: inline-block;
+  padding: 5px 18px;
+  border-radius: 2px;
+  margin-bottom: var(--space-9);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.eyebrow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.12), transparent);
+  animation: tagShine 4s 1s ease-in-out infinite;
+}
+
+/* ── Title ── */
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-16);
+}
+
+.titleLine {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #fff;
+  display: block;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.titleAccent {
+  color: var(--color-accent);
+  text-shadow:
+    0 0 40px rgba(0, 245, 255, 0.35),
+    0 0 80px rgba(0, 245, 255, 0.12);
+  transition-delay: 0.12s;
+}
+
+.titleVisible .titleLine {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Body layout ── */
+.body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 60px;
+  align-items: start;
+  margin-bottom: var(--space-14);
+}
+
+/* ── Manifesto ── */
+.manifesto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.manifesto.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.manifesto p {
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 2;
+  color: #7a8fa8;
+  transition: color 0.4s;
+}
+
+.manifesto.visible p {
+  color: #8fa3be;
+}
+.manifesto p:first-child {
+  font-size: clamp(16px, 1.8vw, 19px);
+  color: #a8c0dc;
+  font-weight: 500;
+}
+
+/* ── Stats ── */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.stat {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 24px var(--space-5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-purple));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.statVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statVisible::before {
+  transform: scaleX(1);
+}
+
+.stat:hover {
+  border-color: rgba(0, 245, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 245, 255, 0.07);
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+  text-shadow: 0 0 24px rgba(0, 245, 255, 0.3);
+  transition: text-shadow 0.3s;
+}
+
+.stat:hover .statNumber {
+  text-shadow: 0 0 32px rgba(0, 245, 255, 0.6);
+}
+
+.statLabel {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+/* ── Chips ── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-2);
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.chips.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chip {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 7px 20px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background 0.25s;
+  cursor: default;
+}
+
+.chip:hover {
+  color: var(--color-accent);
+  border-color: rgba(0, 245, 255, 0.35);
+  background: rgba(0, 245, 255, 0.04);
+}
+
+/* ── Decorations ── */
+.deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 245, 255, 0.04);
+  animation: ringPulse 8s ease-in-out infinite;
+}
+
+.ring1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+  border-color: rgba(0, 245, 255, 0.05);
+}
+
+.ring2 {
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  left: -100px;
+  border-color: rgba(191, 95, 255, 0.05);
+  animation-delay: -4s;
+}
+
+.slash {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 245, 255, 0.06) 40%,
+    rgba(0, 245, 255, 0.06) 60%,
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section {
+    min-height: unset;
+    padding: 60px var(--space-5);
+    align-items: flex-start;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .title {
+    margin-bottom: var(--space-9);
+  }
+  .titleLine {
+    font-size: clamp(36px, 10vw, 56px);
+  }
+
+  .manifesto p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .manifesto p:first-child {
+    font-size: 15px;
+  }
+
+  .stat {
+    padding: var(--space-4) var(--space-3);
+  }
+  .statNumber {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+
+  .chips {
+    gap: var(--space-2);
+  }
+  .chip {
+    font-size: 11px;
+    padding: 6px 14px;
+  }
+}

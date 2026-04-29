@@ -1,9 +1,13 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ─── Tailwind（必須在最前，建立 @layer theme/base/components/utilities） ─── */
+@import 'tailwindcss';
 
-body {
-  margin: 0;
-}
+/* ─── Fontsource ─── */
+@import '@fontsource/rajdhani/600.css';
+@import '@fontsource/rajdhani/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+
+/* ─── 全局樣式（順序不可更動） ─── */
+@import './styles/tokens.css';
+@import './styles/reset.css';
+@import './styles/animations.css';
