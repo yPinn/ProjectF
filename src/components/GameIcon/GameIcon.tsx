@@ -1,11 +1,11 @@
 import gameData from '@/data/games.json'
 import type { TagIconMap } from '@/types'
 
-const map = gameData as TagIconMap
+const entries = Object.entries(gameData as TagIconMap)
 
 function resolve(tag: string): string | undefined {
   const lower = tag.toLowerCase()
-  for (const [key, src] of Object.entries(map)) {
+  for (const [key, src] of entries) {
     if (lower.includes(key.toLowerCase()) || key.toLowerCase().includes(lower)) return src
   }
 }

@@ -49,11 +49,17 @@
 }
 
 /* ── Avatar ── */
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+.avatarWrap {
+  position: relative;
   flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
   overflow: hidden;
   border: 2px solid rgba(var(--accent-rgb, 0, 245, 255), 0.3);
   display: flex;
@@ -70,6 +76,30 @@
   box-shadow: 0 0 12px rgba(var(--accent-rgb, 0, 245, 255), 0.3);
 }
 
+.liveDot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid var(--color-surface, #070e1a);
+  animation: livePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
 .avatarImg {
   width: 100%;
   height: 100%;
@@ -79,7 +109,7 @@
 
 .avatarText {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   color: var(--accent-color, var(--color-accent));
 }
@@ -92,7 +122,7 @@
 
 .name {
   font-family: var(--font-display);
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: #fff;
   margin-bottom: 2px;
@@ -104,7 +134,7 @@
 }
 
 .handle {
-  font-size: 11px;
+  font-size: var(--text-sm);
   letter-spacing: 0.08em;
   color: var(--accent-color, var(--color-accent));
   opacity: 0.75;
@@ -114,11 +144,11 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 0.3125rem;
 }
 
 .tag {
-  font-size: 10px;
+  font-size: var(--text-xs);
   padding: 3px 8px 3px 6px;
   border-radius: 2px;
   border: 1px solid rgba(var(--accent-rgb, 0, 245, 255), 0.22);

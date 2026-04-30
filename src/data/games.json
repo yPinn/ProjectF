@@ -1,15 +1,15 @@
 {
-  "LOL": "/images/games/lol.png",
-  "APEX": "/images/games/apex.png",
+  "League of Legends": "/images/games/lol.png",
+  "Apex Legends": "/images/games/apex.png",
   "Valorant": "/images/games/valorant.png",
-  "TFT": "/images/games/tft.png",
-  "歐卡": "/images/games/ets2.png",
-  "R6": "/images/games/r6.png",
-  "CS2": "/images/games/cs2.png",
-  "雀魂": "/images/games/mahjong.png",
+  "Teamfight Tactics": "/images/games/tft.png",
+  "ETS2": "/images/games/ets2.png",
+  "Rainbow Six": "/images/games/r6.png",
+  "Counter-Strike 2": "/images/games/cs2.png",
+  "Mahjong Soul": "/images/games/mahjong.png",
   "Minecraft": "/images/games/minecraft.png",
-  "三角洲": "/images/games/delta.png",
-  "歌手": "/images/games/singer.png",
-  "法拉利車主": "/images/games/ferrari.png",
-  "BMW車主": "/images/games/bmw.png"
+  "Delta Force": "/images/games/delta.png",
+  "Singing": "/images/games/singer.png",
+  "Ferrari": "/images/games/ferrari.png",
+  "BMW": "/images/games/bmw.png"
 }

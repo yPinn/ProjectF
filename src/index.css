@@ -1,6 +1,3 @@
-/* ─── Tailwind（必須在最前，建立 @layer theme/base/components/utilities） ─── */
-@import 'tailwindcss';
-
 /* ─── Fontsource ─── */
 @import '@fontsource/rajdhani/600.css';
 @import '@fontsource/rajdhani/700.css';

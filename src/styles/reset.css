@@ -1,9 +1,23 @@
+/* ── Box sizing ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ── Root: 16px @ 1920px, caps at 1920px — wider screens keep same object sizes ── */
 html {
+  font-size: clamp(8px, 0.833vw, 16px);
   color-scheme: dark;
-  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
 }
 
 body {
+  margin: 0;
+  overscroll-behavior-y: none;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
@@ -15,6 +29,98 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ── Typography reset ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* ── Lists ── */
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Media ── */
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Form elements ── */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+/* ── Links ── */
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* ── Table ── */
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+/* ── Focus ── */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Interaction ── */
 a,
 button,
 label,
@@ -26,15 +132,7 @@ textarea,
   touch-action: manipulation;
 }
 
-:focus {
-  outline: none;
-}
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -49,6 +147,7 @@ textarea,
   background: rgba(0, 245, 255, 0.2);
 }
 
+/* ── Cursor ── */
 @media (pointer: fine) {
   html,
   *,
@@ -82,6 +181,7 @@ textarea,
   }
 }
 
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

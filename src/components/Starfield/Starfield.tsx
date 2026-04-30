@@ -86,8 +86,8 @@ export default function Starfield() {
     }
 
     function init() {
-      W = canvas.width = window.innerWidth
-      H = canvas.height = window.innerHeight
+      W = canvas!.width = window.innerWidth
+      H = canvas!.height = window.innerHeight
       stars = LAYERS.flatMap((_, li) =>
         Array.from({ length: LAYERS[li].count }, () => makeStar(li)),
       )

@@ -6,7 +6,7 @@
   font-display: swap;
 }
 
-@theme {
+:root {
   /* Fonts */
   --font-display: 'Rajdhani', 'Inter', sans-serif;
   --font-body: 'jf-openhuninn', 'Inter', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
@@ -44,35 +44,53 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Spacing — 4px grid */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-7: 28px;
-  --space-8: 32px;
-  --space-9: 36px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-14: 56px;
-  --space-16: 64px;
+  /* Spacing — 4px grid (1rem = 16px @ 1920px) */
+  --space-1: 0.25rem; /* 4px  */
+  --space-2: 0.5rem; /* 8px  */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-7: 1.75rem; /* 28px */
+  --space-8: 2rem; /* 32px */
+  --space-9: 2.25rem; /* 36px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-14: 3.5rem; /* 56px */
+  --space-16: 4rem; /* 64px */
+
+  /* Line heights */
+  --lh-none: 1;
+  --lh-tight: 1.25; /* 標題用 */
+  --lh-snug: 1.375;
+  --lh-normal: 1.5; /* 內文建議最少 1.5 */
+  --lh-relaxed: 1.625;
+
+  /* Letter spacing */
+  --ls-tighter: -0.05em; /* 大標題稍微縮緊 */
+  --ls-tight: -0.025em;
+  --ls-normal: 0em;
+  --ls-wide: 0.025em;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 
   /* Type scale — 1.25 ratio */
-  --text-xs: 0.64rem;
-  --text-sm: 0.8rem;
-  --text-base: 1rem;
-  --text-md: 1.25rem;
-  --text-lg: 1.563rem;
-  --text-xl: 1.953rem;
-  --text-2xl: 2.441rem;
-  --text-3xl: 3.052rem;
+  --text-xs: 0.75rem; /* 12px | 輔助文字上限 */
+  --text-sm: 0.875rem; /* 14px | 常用副文本 */
+  --text-base: 1rem; /* 16px | 內文標準 */
+  --text-lg: 1.125rem; /* 18px | 小標題 */
+  --text-xl: 1.25rem; /* 20px | H3 */
+  --text-2xl: 1.5rem; /* 24px | H2 */
+  --text-3xl: 1.875rem; /* 30px | H1 */
+  --text-4xl: 2.25rem; /* 36px | 視覺大標 */
 
-  /* Breakpoints */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  --breakpoint-sm: 640px; /* Mobile Landscape / Tablet */
+  --breakpoint-md: 768px; /* Tablet Portrait */
+  --breakpoint-lg: 1024px; /* Laptop / Tablet Landscape */
+  --breakpoint-xl: 1280px; /* Desktop */
   --breakpoint-2xl: 1536px;
 }

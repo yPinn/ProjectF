@@ -1,13 +1,11 @@
 [
   {
-    "name": "嚕嚕閔",
     "username": "luming1228",
     "photo": "/images/members/luming1228.png",
     "title": "法克娛樂 歌神",
     "color": "#e4c778",
-    "bio": "嚕嚕閔是法克娛樂的門面擔當，一開口就知道為什麼叫歌神。聲線辨識度極高，唱起來能讓聊天室從狂刷彈幕到集體靜音，那種安靜是最高規格的讚美。LOL、APEX、TFT 他也玩，實力不差，但每次開台只要他一開嗓，遊戲反而變成背景——觀眾要的就是這把聲音。法克娛樂歌神，當之無愧。",
-    "tags": ["歌手", "LOL", "APEX", "TFT"],
-    "twitch": "https://www.twitch.tv/luming1228",
+    "bio": "嚕嚕閔是法克娛樂的門面擔當，也是公認的歌神。只要一開口，就能立刻理解這個稱號從何而來。聲線辨識度極高，穩定又有感染力，往往讓原本熱鬧狂刷的聊天室瞬間安靜下來——而那份安靜，正是最高級的讚賞。雖然他也常玩 LOL、APEX、TFT，實力同樣在線，但只要開嗓，遊戲就自然退到背景。觀眾留下來看的，始終是這把無可取代的聲音。作為法克娛樂的歌神，當之無愧。",
+    "tags": ["Singing", "League of Legends", "Apex Legends", "Teamfight Tactics"],
     "audio": "/audio/luming1228.mp3"
   }
 ]

@@ -89,12 +89,12 @@
 /* ── Tag pill ── */
 .tag {
   display: inline-block;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 500;
   letter-spacing: 0.55em;
   color: var(--color-accent);
   border: 1px solid rgba(0, 245, 255, 0.28);
-  padding: 5px 20px;
+  padding: 0.3125rem 1.25rem;
   border-radius: 2px;
   margin-bottom: var(--space-8);
   text-transform: uppercase;
@@ -189,7 +189,7 @@
 .divider {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0.875rem;
   max-width: 300px;
   margin: 0 auto var(--space-12);
   opacity: 0;
@@ -204,8 +204,8 @@
 }
 
 .diamond {
-  width: 7px;
-  height: 7px;
+  width: 0.4375rem;
+  height: 0.4375rem;
   background: var(--color-accent);
   transform: rotate(45deg);
   box-shadow:
@@ -219,22 +219,190 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   opacity: 0;
   animation: fadeSlideUp 0.8s 2s ease forwards;
 }
 
 .scrollHint span {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--color-muted);
   letter-spacing: 0.3em;
 }
 
 .scrollArrow {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-right: 2px solid rgba(0, 245, 255, 0.5);
   border-bottom: 2px solid rgba(0, 245, 255, 0.5);
   transform: rotate(45deg);
   animation: arrowBounce 1.2s ease-in-out infinite;
+}
+
+/* ── Keyframes (local so CSS Modules can scope them correctly) ── */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleBlast {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes glitchTop {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateX(0);
+  }
+  91% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(-4px);
+  }
+  93% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(4px);
+  }
+  95% {
+    opacity: 0.7;
+    transform: translateX(-50%) translateX(-2px);
+  }
+  97% {
+    opacity: 0;
+  }
+}
+
+@keyframes glitchBottom {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateX(0);
+  }
+  92% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(3px);
+  }
+  94% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(-3px);
+  }
+  96% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateX(1px);
+  }
+  98% {
+    opacity: 0;
+  }
+}
+
+@keyframes gridPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulseCenter {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes tagShine {
+  0% {
+    left: -100%;
+  }
+  40%,
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes linePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes diamondPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 12px var(--color-accent),
+      0 0 24px rgba(0, 245, 255, 0.5);
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px var(--color-accent),
+      0 0 40px rgba(0, 245, 255, 0.7);
+    transform: rotate(45deg) scale(1.4);
+  }
+}
+
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(45deg) translateY(6px);
+    opacity: 1;
+  }
 }

@@ -32,14 +32,17 @@
   border-radius: 10px;
   width: 100%;
   max-width: 680px;
-  max-height: 88vh;
-  overflow-y: auto;
   transform: translateY(30px) scale(0.95);
   transition:
     transform 0.4s var(--ease-spring),
     opacity 0.35s ease;
   position: relative;
   opacity: 0;
+}
+
+.scrollArea {
+  max-height: 88vh;
+  overflow-y: auto;
 }
 
 .overlay.active .modal {
@@ -69,7 +72,7 @@
 
 /* ── Body ── */
 .body {
-  padding: 36px 36px 40px;
+  padding: 2.25rem 2.25rem 2.5rem;
 }
 
 .close {
@@ -79,11 +82,11 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
   color: var(--color-muted);
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 0.9375rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,13 +109,13 @@
 .header {
   display: flex;
   align-items: center;
-  gap: 22px;
-  margin-bottom: 30px;
+  gap: 1.375rem;
+  margin-bottom: 1.875rem;
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -140,13 +143,13 @@
 
 .avatarText {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: 700;
 }
 
 .name {
   font-family: var(--font-display);
-  font-size: 34px;
+  font-size: 2.125rem;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 6px;
@@ -284,6 +287,49 @@
   height: 20px;
   fill: #9146ff;
   flex-shrink: 0;
+}
+
+/* ── Keyframes ── */
+@keyframes accentSweep {
+  from {
+    left: -60%;
+  }
+  to {
+    left: 160%;
+  }
+}
+
+@keyframes modalAvatarIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes modalNameIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes modalSectionIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Mobile ── */

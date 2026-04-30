@@ -1,25 +1,22 @@
-import { useState } from 'react'
+import { useMemo } from 'react'
+import './App.css'
 import Cursor from '@/components/Cursor/Cursor'
 import Starfield from '@/components/Starfield/Starfield'
 import Splash from '@/sections/Splash/Splash'
 import About from '@/sections/About/About'
-import StreamerCard from '@/components/StreamerCard/StreamerCard'
 import MemberCard from '@/components/MemberCard/MemberCard'
-import Modal from '@/components/Modal/Modal'
 import { useInView } from '@/hooks/useInView'
-import { useSnapScroll } from '@/hooks/useSnapScroll'
-import type { Streamer, Mascot } from '@/types'
+import { useStreamStatus } from '@/hooks/useStreamStatus'
+import { useTwitchProfiles } from '@/hooks/useTwitchProfiles'
 
-import streamersData from '@/data/streamers.json'
-import mascotsData from '@/data/mascots.json'
+import StreamerSlider from '@/components/StreamerSlider/StreamerSlider'
+import { sliderStreamers } from '@/data/sliderData'
 import membersData from '@/data/members.json'
 
-const streamers = streamersData as Streamer[]
-const mascots = mascotsData as Mascot[]
 const members = membersData as import('./types').Member[]
-const roster = [...streamers, ...mascots]
 
-const isMouseDevice = window.matchMedia('(pointer: fine)').matches
+// Evaluated once at module load — safe for this client-only SPA
+const isMouseDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   const { ref, inView } = useInView()
@@ -72,8 +69,31 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const [active, setActive] = useState<Streamer | Mascot | null>(null)
-  useSnapScroll(active !== null)
+  const streamStatuses = useStreamStatus()
+  const twitchProfiles = useTwitchProfiles()
+
+  const enrichedSlides = useMemo(
+    () =>
+      sliderStreamers.map((slide) => {
+        const profile = twitchProfiles[slide.id]
+        if (!profile) return slide
+        return {
+          ...slide,
+          name: profile.displayName,
+          navThumbnail: profile.profileImageUrl,
+        }
+      }),
+    [twitchProfiles],
+  )
+
+  const enrichedMembers = useMemo(
+    () =>
+      members.map((m) => ({
+        ...m,
+        name: twitchProfiles[m.username]?.displayName ?? m.username,
+      })),
+    [twitchProfiles],
+  )
 
   return (
     <>
@@ -82,20 +102,13 @@ export default function App() {
       <Splash />
       <About />
 
-      <main id="mainContent" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
-        {/* Streamers + Mascots */}
-        <section style={{ maxWidth: 1060, margin: '0 auto', padding: '0 24px 60px' }}>
-          <SectionLabel>
-            <strong>最強實況主</strong>
-            {'　'}ROSTER
-          </SectionLabel>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            {roster.map((p, i) => (
-              <StreamerCard key={p.username} person={p} index={i} onClick={setActive} />
-            ))}
-          </div>
-        </section>
+      <StreamerSlider
+        slides={enrichedSlides}
+        logoUrl="/images/logo.png"
+        verticalText="Fuck Entertainment"
+      />
 
+      <main id="mainContent" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
         {/* Members */}
         <section style={{ maxWidth: 1060, margin: '0 auto', padding: '0 24px 60px' }}>
           <SectionLabel>
@@ -109,8 +122,13 @@ export default function App() {
               gap: 16,
             }}
           >
-            {members.map((m, i) => (
-              <MemberCard key={m.username} member={m} index={i} />
+            {enrichedMembers.map((m, i) => (
+              <MemberCard
+                key={m.username}
+                member={m}
+                index={i}
+                status={streamStatuses[m.username]}
+              />
             ))}
           </div>
         </section>
@@ -132,8 +150,6 @@ export default function App() {
           © 2026 法克娛樂 FUCK ENTERTAINMENT &nbsp;／&nbsp; ALL RIGHTS RESERVED
         </footer>
       </main>
-
-      <Modal person={active} onClose={() => setActive(null)} />
     </>
   )
 }

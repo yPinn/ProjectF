@@ -23,7 +23,7 @@ function StatCard({ value, label }: { value: number | string; label: string }) {
     const start = performance.now()
     function tick(now: number) {
       const ease = 1 - Math.pow(1 - Math.min((now - start) / duration, 1), 3)
-      setCount(Math.round(ease * (value as number)))
+      setCount(Math.round(ease * value))
       if (ease < 1) requestAnimationFrame(tick)
     }
     requestAnimationFrame(tick)
@@ -31,9 +31,7 @@ function StatCard({ value, label }: { value: number | string; label: string }) {
 
   return (
     <div ref={ref} className={`${styles.stat} ${inView ? styles.statVisible : ''}`}>
-      <div className={styles.statNumber}>
-        {typeof value === 'number' ? count.toLocaleString() : value}
-      </div>
+      <div className={styles.statNumber}>{typeof value === 'number' ? count : value}</div>
       <div className={styles.statLabel}>{label}</div>
     </div>
   )

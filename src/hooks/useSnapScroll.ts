@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SECTION_IDS = ['splash', 'aboutSection', 'mainContent']
+const SECTION_IDS = ['splash', 'aboutSection', 'streamerSlider', 'mainContent']
 const THRESHOLD = 80
 const COOLDOWN = 900
 
@@ -39,8 +39,10 @@ export function useSnapScroll(isModalOpen: boolean) {
       if (Math.abs(accDelta) < THRESHOLD) return
       const dir = accDelta > 0 ? 1 : -1
       accDelta = 0
-      if (dir < 0) return
+      if (dir < 0) return // up-scroll is intentionally free-scrolling; only snap forward
       const cur = currentIdx()
+      // slider section manages its own wheel — only take over at boundary
+      if (sections[cur]?.id === 'streamerSlider') return
       if (cur < sections.length - 1) goTo(cur + 1)
     }
 

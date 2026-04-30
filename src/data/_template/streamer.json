@@ -1,13 +1,11 @@
 [
   {
-    "name": "顯示名稱，例：一韓小串文",
     "username": "Twitch 帳號，例：lilhanwen3377",
     "photo": "/images/members/帳號名稱.png",
     "title": "法克娛樂 職稱，例：副會長",
     "color": "#00f5ff （16進位色碼，可至 https://htmlcolorcodes.com 挑選）",
     "bio": "個人介紹，數行以內",
     "tags": ["遊戲或興趣，例：LOL", "APEX"],
-    "twitch": "https://www.twitch.tv/帳號名稱",
     "audio": "/audio/帳號名稱.mp3"
   }
 ]

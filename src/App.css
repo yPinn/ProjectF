@@ -1,0 +1,7 @@
+/* scroll-snap 吸附點 */
+#splash,
+#aboutSection,
+#streamerSlider,
+#mainContent {
+  scroll-snap-align: start;
+}

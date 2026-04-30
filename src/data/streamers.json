@@ -1,90 +1,110 @@
 [
   {
-    "name": "一韓小串文",
     "username": "lilhanwen3377",
     "photo": "/images/members/lilhanwen3377.png",
     "title": "法克娛樂 會長",
     "color": "#a169f0",
-    "bio": "法克娛樂的起點，也是整個生態圈的核心。從一個人開台到拉起一整批志同道合的人，他建立的不只是頻道，而是一種氛圍——沒有人設、沒有劇本，觀眾進來就是朋友。深夜開台、講到忘記時間，這種真實感是任何製作都複製不了的東西。",
-    "tags": ["LOL", "APEX", "Valorant", "TFT"],
-    "twitch": "https://www.twitch.tv/lilhanwen3377",
+    "bio": "法克娛樂的起點，也是整個生態圈的核心。從一個人開台，到凝聚一群志同道合的夥伴，他建立的不只是頻道，更是一種獨特的氛圍。沒有刻意人設，沒有安排劇本，觀眾走進來，就像回到朋友聚會現場。深夜開台、聊到忘記時間，是他的日常節奏。那種自然流露的真實感，不靠包裝，也無法被複製。也正因如此，他不只是起點，更是法克娛樂一路延伸至今的靈魂人物。",
+    "tags": ["League of Legends", "Apex Legends", "Valorant", "Teamfight Tactics"],
     "audio": "/audio/lilhanwen3377.mp3"
   },
   {
-    "name": "麻辣布丁狗",
     "username": "winsyi",
     "photo": "/images/members/winsyi.png",
     "title": "法克娛樂 副會長",
     "color": "#F0DD48",
-    "bio": "Valorant 場上走位沉穩、判斷精準，是那種讓隊伍在亂局中保持節奏的人。歐卡司機的身份在直播裡展現出另一面——半夜跨越虛擬歐洲大陸，沉浸感十足。法克娛樂副會長，頭銜背後是真正靠實力和信任站到這個位置的人。",
-    "tags": ["Valorant", "歐卡"],
-    "twitch": "https://www.twitch.tv/winsyi",
+    "bio": "在 Valorant 場上，他走位沉穩、判斷精準，是那種能在混亂局勢中穩住節奏、帶起全隊步調的人，關鍵時刻不急不躁，總能做出正確選擇。直播裡，歐卡司機的身份則展現出截然不同的一面，深夜駕車穿越虛擬歐洲大陸，節奏悠長卻極具沉浸感，讓人不知不覺一路看到天亮。作為法克娛樂副會長，這個頭銜背後代表的，不只是身分，更是靠實力與信任一步步站上這個位置的證明。",
+    "tags": ["Valorant", "ETS2"],
     "audio": "/audio/winsyi.mp3"
   },
   {
-    "name": "黃金酷辣雞腿排",
     "username": "yyo277",
     "photo": "/images/members/yyo277.png",
     "title": "法克娛樂 最美公關",
     "color": "#CF7B5B",
-    "bio": "LOL、Valorant 全都玩，TFT 排陣有自己一套邏輯。法克娛樂的公關形象擔當，不只是外型，更是那種讓人在頻道裡感覺舒服、想留下來的氣質。他的存在讓整個頻道的氛圍更好看了一個等級。",
-    "tags": ["LOL", "Valorant", "TFT"],
-    "twitch": "https://www.twitch.tv/yyo277",
+    "bio": "LOL、Valorant 全都玩，TFT 排陣也有自己一套清晰邏輯，操作與觀念兼具，玩起來總有自己的節奏。作為法克娛樂的公關形象擔當，亮點不只在外型，更在於自然親切的互動感，讓人一進到頻道就能感到自在、願意停留下來。她的存在總能讓氣氛變得更柔和也更有記憶點，不張揚卻十分明顯地，將整個頻道氛圍提升了一個等級。",
+    "tags": ["League of Legends", "Valorant", "Teamfight Tactics"],
     "audio": "/audio/yyo277.mp3"
   },
   {
-    "name": "蓀蓀楠瓜",
     "username": "sunsun_pumpkin",
     "photo": "/images/members/sunsun_pumpkin.png",
     "title": "法克娛樂 仙女下凡",
     "color": "#e97e1b",
-    "bio": "法克娛樂裡自帶一種獨特氣質的存在——舉止有素質、風格有辨識度，那種從容和優雅的感覺在直播圈裡完全少見。LOL、APEX、Valorant、CS2、三角洲、TFT、Minecraft、雀魂 全都是她的舞台，遊戲打起來有自己的節奏，看她打遊戲就像看一個很清楚自己在做什麼的人。開台的時候氣氛就是不一樣，說不上來，就是讓人想靜下來好好看。法克娛樂有她在，整個頻道的質感都往上走了一個層次。",
-    "tags": ["LOL", "Valorant", "CS2", "APEX", "三角洲", "TFT", "Minecraft", "雀魂"],
-    "twitch": "https://www.twitch.tv/sunsun_pumpkin",
+    "bio": "法克娛樂裡自帶獨特氣質的存在，舉止有分寸，風格鮮明，那種從容與優雅感在直播圈相當少見。LOL、APEX、Valorant、CS2、三角洲、TFT、Minecraft、雀魂都是她的舞台，操作有節奏、思路清晰，看得出她始終掌握局勢。開台時不喧鬧、不刻意，卻總讓人自然停下來觀看。她的存在不只增添亮點，也讓法克娛樂整體質感提升了一個層次。",
+    "tags": ["League of Legends", "Valorant", "Counter-Strike 2", "Apex Legends"],
     "audio": "/audio/sunsun_pumpkin.mp3"
   },
   {
-    "name": "4泡芙拉",
     "username": "puffsla",
     "photo": "/images/members/puffsla.png",
     "title": "法克娛樂 空氣檢測員",
     "color": "#ff8fd8",
-    "bio": "本名歐仙堂，法克娛樂裡綽號最多、故事也最多的人。外號 Ｂ寶，喜歡在遊戲裡裝得很厲害、然後在最關鍵的時候送掉人頭。煙鬼身分讓他在緊張時刻的反應更加迷人——螢幕外一根菸，螢幕內一個操作，觀眾全場靜默。",
-    "tags": ["LOL", "APEX", "Valorant"],
-    "twitch": "https://www.twitch.tv/puffsla",
+    "bio": "本名歐仙堂，是法克娛樂裡綽號最多、話題也最多的人。外號 B寶，總喜歡在遊戲裡擺出一副勝券在握的樣子，彷彿下一秒就要上演高光操作，結果往往在最關鍵的時刻率先送出人頭，留下全場錯愕。煙鬼身分也成了他的個人標誌，緊張時刻螢幕外點起一根菸，螢幕內交出一波操作，反差感十足。觀眾對他的期待，從來不是穩定發揮，而是下一次又會帶來什麼經典名場面。",
+    "tags": ["League of Legends", "Apex Legends", "Valorant"],
     "audio": "/audio/puffsla.mp3"
   },
   {
-    "name": "我愛鄭雅賢",
     "username": "mx_715",
     "photo": "/images/members/mx_715.png",
     "title": "法克娛樂 經紀人",
     "color": "#bf5fff",
     "bio": "法克娛樂的招募經紀人，負責把對的人拉進這個圈子——目前團隊裡的陣容有一半都是他的功勞。眼光精準、聊起人來頭頭是道，選人標準外人看不懂，但結果都會說話。LOL 跟 APEX 是他的主場，實力在團隊裡絕對數一數二，是那種你以為他只是在管事、結果上了遊戲直接給你一個下馬威的存在。",
-    "tags": ["LOL", "APEX", "TFT"],
-    "twitch": "https://www.twitch.tv/mx_715",
+    "tags": ["League of Legends", "Apex Legends", "Teamfight Tactics"],
     "audio": "/audio/mx_715.mp3"
   },
   {
-    "name": "大頭大頭大頭",
     "username": "datou_cheng",
     "photo": "/images/members/datou_cheng.png",
     "title": "法克娛樂 老司機",
     "color": "#00f5ff",
     "bio": "頭很大，但裝的東西也很多。LOL 場上反應奇快、APEX 槍法時好時壞，Valorant 則是讓隊友又愛又恨的那種存在。開台風格不拘一格，笑點跟操作一樣難以預測。法克娛樂裡少數能靠一句話讓全場靜下來、又靠下一句話讓大家爆笑的人。",
-    "tags": ["LOL", "APEX", "Valorant", "歐卡", "BMW車主"],
-    "twitch": "https://www.twitch.tv/datou_cheng",
+    "tags": ["League of Legends", "Apex Legends", "Valorant", "ETS2"],
     "audio": "/audio/datou_cheng.mp3"
   },
   {
-    "name": "酷酷的斜音梗",
     "username": "coolhomophonic",
     "photo": "/images/members/coolhomophonic.png",
-    "title": "法克娛樂 旗靈王",
+    "title": "法克娛樂 棋靈王",
     "color": "#c58f6f",
     "bio": "TFT多季宗師，S13菁英玩家，喜歡唱歌但很常翻車。",
-    "tags": ["LOL", "Valorant", "TFT"],
-    "twitch": "https://www.twitch.tv/coolhomophonic",
+    "tags": ["League of Legends", "Valorant", "Teamfight Tactics"],
     "audio": "/audio/coolhomophonic.mp3"
+  },
+  {
+    "username": "dd__030",
+    "photo": "/images/members/dd__030.png",
+    "title": "法克娛樂 吱吱吱吱",
+    "color": "#fcfc62",
+    "bio": "左手持滑鼠吱、Valorant 打得讓人心服口服吱，光這一點就已經夠讓人印象深刻了吱。聲音甜吱、人又美吱，開台的時候光是在那邊你就已經想一直看吱。吱吱吱。",
+    "tags": ["Valorant", "Apex Legends"],
+    "audio": "/audio/dd__030.mp3"
+  },
+  {
+    "username": "hachimi1010",
+    "photo": "/images/members/hachimi1010.png",
+    "title": "法克娛樂 可愛天花板",
+    "color": "#a8c3d7",
+    "bio": "是位充滿哈吉米風格的可愛女實況主，笑聲甜甜超療癒！主玩 Valorant，技術與歡樂兼具，無論精彩擊殺還是搞笑失誤都超圈粉。跟著她一起哈吉米，保證讓你邊看邊笑、心情直接被治癒！用本名的琳疊字加上前面的哈吉米，就是可愛x可愛不是兩倍的可愛是二次方的可愛！",
+    "tags": ["Valorant"],
+    "audio": "/audio/hachimi1010.mp3"
+  },
+  {
+    "username": "loui61095",
+    "photo": "/images/members/loui61095.png",
+    "title": "法克娛樂 腹肌出沒",
+    "color": "#6c8fff",
+    "bio": "嘴上吵得要命、實際上是全場的氣氛核心。人帥、有腹肌，斜槓到讓你不知道該先羨慕哪一塊。效果王不是說說而已——有他在的台，每一段都是highlight。法克娛樂裡那種你以為他在搗亂、結果發現少了他整個台就少了靈魂的人。",
+    "tags": ["Valorant", "Apex Legends"],
+    "audio": "/audio/loui61095.mp3"
+  },
+  {
+    "username": "yu_er___",
+    "photo": "/images/members/yu_er___.png",
+    "title": "法克娛樂 甜心擔當",
+    "color": "#7ad8e9",
+    "bio": "法克娛樂裡最像開盲盒的存在——每天都不一樣，但每天都讓人驚喜。有點呆呆的、講話偶爾不過腦，但那種真實感反而是最可愛的地方。不會硬帶話題，但你說什麼她都認真在聽。隨和、好相處，只要你來陪她玩，她就很開心。沒人來的話會很桑心的，所以來吧。",
+    "tags": ["League of Legends", "Valorant"],
+    "audio": "/audio/yu_er___.mp3"
   }
 ]
