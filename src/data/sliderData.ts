@@ -1,6 +1,10 @@
-import type { StreamerSlideData } from '@/types'
+import type { Streamer, StreamerSlideData } from '@/types'
 import { twitchUrl } from '@/utils/url'
-import streamersData from './streamers.json'
+import peopleData from './people.json'
+
+const streamersData = (peopleData as import('@/types').Person[]).filter(
+  (p): p is Streamer => p.section === 'slider',
+)
 
 type TagEntry = string | { src: string; raw: true }
 

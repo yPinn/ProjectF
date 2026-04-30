@@ -3,26 +3,9 @@ export interface Env {
   TWITCH_CLIENT_SECRET: string
 }
 
-export const ALL_USERNAMES = [
-  'lilhanwen3377',
-  'winsyi',
-  'yyo277',
-  'sunsun_pumpkin',
-  'puffsla',
-  'mx_715',
-  'datou_cheng',
-  'coolhomophonic',
-  'dd__030',
-  'hachimi1010',
-  'loui61095',
-  'yu_er___',
-  'kkai0000',
-  'guanwei1mao666',
-  'yueyue_qoq',
-  'ijack932',
-  'kuroneko7777',
-  'luming1228',
-]
+import peopleData from '../../src/data/people.json'
+
+export const ALL_USERNAMES: string[] = peopleData.map((p) => p.username)
 
 export const JSON_HEADERS = {
   'Content-Type': 'application/json',

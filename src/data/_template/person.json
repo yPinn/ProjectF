@@ -1,0 +1,21 @@
+[
+  {
+    "_comment": "Slider streamer — section must be 'slider', all fields required",
+    "username": "twitch_account",
+    "photo": "/images/members/twitch_account.png",
+    "section": "slider",
+    "title": "法克娛樂 職稱",
+    "color": "#00f5ff",
+    "bio": "個人介紹",
+    "tags": ["League of Legends", "Valorant"],
+    "audio": "/audio/twitch_account.mp3"
+  },
+  {
+    "_comment": "Member card only — section must be 'member', bio/title/audio not needed",
+    "username": "twitch_account",
+    "photo": "/images/members/twitch_account.png",
+    "section": "member",
+    "color": "#00f5ff",
+    "tags": ["League of Legends"]
+  }
+]

@@ -11,9 +11,10 @@ import { useTwitchProfiles } from '@/hooks/useTwitchProfiles'
 
 import StreamerSlider from '@/components/StreamerSlider/StreamerSlider'
 import { sliderStreamers } from '@/data/sliderData'
-import membersData from '@/data/members.json'
+import peopleData from '@/data/people.json'
+import type { Member, Person } from '@/types'
 
-const members = membersData as import('./types').Member[]
+const members = (peopleData as Person[]).filter((p): p is Member => p.section === 'member')
 
 // Evaluated once at module load — safe for this client-only SPA
 const isMouseDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches

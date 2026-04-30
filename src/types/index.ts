@@ -1,25 +1,30 @@
-interface BasePerson {
+export interface Streamer {
+  username: string
   /** Populated at runtime from Twitch display_name; falls back to username */
   name?: string
-  username: string
   photo?: string
   color: string
   tags: string[]
-}
-
-export interface Streamer extends BasePerson {
+  section: 'slider'
   title: string
   bio: string
   audio: string
 }
 
-export interface Mascot extends BasePerson {
-  title?: string
-  bio?: string
-  audio?: string
+export interface Member {
+  username: string
+  /** Populated at runtime from Twitch display_name; falls back to username */
+  name?: string
+  photo?: string
+  color: string
+  tags: string[]
+  section: 'member'
 }
 
-export type Member = BasePerson
+/** Mascot is now merged into Streamer */
+export type Mascot = Streamer
+
+export type Person = Streamer | Member
 
 export type TagIconMap = Record<string, string>
 
