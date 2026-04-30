@@ -19,11 +19,12 @@ function StatCard({ value, label }: { value: number | string; label: string }) {
   useEffect(() => {
     if (!inView || animated.current || typeof value !== 'number') return
     animated.current = true
+    const numValue = value
     const duration = 1200
     const start = performance.now()
     function tick(now: number) {
       const ease = 1 - Math.pow(1 - Math.min((now - start) / duration, 1), 3)
-      setCount(Math.round(ease * value))
+      setCount(Math.round(ease * numValue))
       if (ease < 1) requestAnimationFrame(tick)
     }
     requestAnimationFrame(tick)
