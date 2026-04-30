@@ -1,0 +1,6 @@
+name = "fuck-ent"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "dist"
+
+# 本地 secret 放 .dev.vars（已加入 .gitignore），勿寫在這裡
+# 正式環境在 Cloudflare dashboard > Settings > Environment Variables 設定

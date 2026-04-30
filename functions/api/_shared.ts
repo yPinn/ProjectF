@@ -1,0 +1,48 @@
+export interface Env {
+  TWITCH_CLIENT_ID: string
+  TWITCH_CLIENT_SECRET: string
+}
+
+export const ALL_USERNAMES = [
+  'lilhanwen3377',
+  'winsyi',
+  'yyo277',
+  'sunsun_pumpkin',
+  'puffsla',
+  'mx_715',
+  'datou_cheng',
+  'coolhomophonic',
+  'kkai0000',
+  'guanwei1mao666',
+  'yueyue_qoq',
+  'ijack932',
+  'kuroneko7777',
+  'luming1228',
+]
+
+export const JSON_HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+}
+
+// Persists within a CF isolate's lifetime — avoids re-requesting tokens on every request
+let tokenCache: { value: string; expiresAt: number } | null = null
+
+export async function getAppToken(env: Env): Promise<string> {
+  const now = Date.now()
+  if (tokenCache && tokenCache.expiresAt > now + 60_000) return tokenCache.value
+
+  const res = await fetch('https://id.twitch.tv/oauth2/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: env.TWITCH_CLIENT_ID,
+      client_secret: env.TWITCH_CLIENT_SECRET,
+      grant_type: 'client_credentials',
+    }),
+  })
+
+  const data = (await res.json()) as { access_token: string; expires_in: number }
+  tokenCache = { value: data.access_token, expiresAt: now + data.expires_in * 1000 }
+  return data.access_token
+}
