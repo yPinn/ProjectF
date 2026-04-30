@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:cf": "wrangler pages dev -- vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -14,10 +15,8 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "@fontsource/rajdhani": "^5.2.7",
-    "@tailwindcss/vite": "^4.2.4",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "tailwindcss": "^4.2.4"
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -37,6 +36,7 @@
     "prettier": "^3.8.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "wrangler": "^4.86.0"
   }
 }
