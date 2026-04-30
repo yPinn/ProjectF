@@ -2,5 +2,8 @@ name = "fuck-ent"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
 
-# 本地 secret 放 .dev.vars（已加入 .gitignore），勿寫在這裡
-# 正式環境在 Cloudflare dashboard > Settings > Environment Variables 設定
+[vars]
+TWITCH_CLIENT_ID = "oavwe4qqkesekjboulah5j5qjnt6o7"
+
+# TWITCH_CLIENT_SECRET 是機密，透過 CF Dashboard > Settings > Secrets 設定
+# 本地開發用 .dev.vars（已加入 .gitignore）
