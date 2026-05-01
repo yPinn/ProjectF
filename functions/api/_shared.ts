@@ -1,6 +1,7 @@
 export interface Env {
   TWITCH_CLIENT_ID: string
   TWITCH_CLIENT_SECRET: string
+  PURGE_SECRET: string
 }
 
 import peopleData from '../../src/data/people.json'
