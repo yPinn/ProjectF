@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 6, 14, 0);
+  background: rgba(var(--color-bg-rgb), 0);
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
@@ -18,8 +18,8 @@
 .overlay.active {
   opacity: 1;
   pointer-events: all;
-  background: rgba(3, 6, 14, 0.93);
-  backdrop-filter: blur(12px);
+  background: rgba(var(--color-bg-rgb), 0.93);
+  backdrop-filter: var(--blur-md);
   transition:
     opacity 0.35s ease,
     background 0.35s ease,
@@ -29,7 +29,7 @@
 .modal {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: var(--radius-2xl);
   width: 100%;
   max-width: 680px;
   transform: translateY(30px) scale(0.95);
@@ -53,7 +53,7 @@
 /* ── Accent bar ── */
 .accentBar {
   height: 4px;
-  border-radius: 10px 10px 0 0;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -67,12 +67,12 @@
   height: 100%;
   background: rgba(255, 255, 255, 0.3);
   animation: accentSweep 1.2s 0.3s forwards;
-  animation-timing-function: var(--ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+  animation-timing-function: var(--ease-in-out);
 }
 
 /* ── Body ── */
 .body {
-  padding: 2.25rem 2.25rem 2.5rem;
+  padding: var(--space-9) var(--space-9) var(--space-10);
 }
 
 .close {
@@ -82,9 +82,9 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
   color: var(--color-muted);
-  width: 2rem;
-  height: 2rem;
-  border-radius: 4px;
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-size: 0.9375rem;
   display: flex;
@@ -116,14 +116,14 @@
 .avatar {
   width: 5rem;
   height: 5rem;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
   animation: modalAvatarIn 0.5s 0.15s both;
-  animation-timing-function: var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  animation-timing-function: var(--ease-spring);
   transition: box-shadow 0.3s;
 }
 
@@ -138,28 +138,28 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
 }
 
 .avatarText {
   font-family: var(--font-display);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
 }
 
 .name {
   font-family: var(--font-display);
   font-size: 2.125rem;
-  font-weight: 700;
-  line-height: 1;
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-none);
   margin-bottom: 6px;
   animation: modalNameIn 0.5s 0.2s ease both;
 }
 
 .handle {
-  font-size: 14px;
+  font-size: var(--text-sm);
   color: var(--color-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-wider);
   animation: modalNameIn 0.5s 0.28s ease both;
 }
 
@@ -179,7 +179,7 @@
 }
 
 .sectionLabel {
-  font-size: 11px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.32em;
   color: var(--color-muted);
   text-transform: uppercase;
@@ -197,7 +197,7 @@
 }
 
 .bio {
-  font-size: 16px;
+  font-size: var(--text-base);
   line-height: 1.85;
   color: #9aaac4;
 }
@@ -210,9 +210,9 @@
 }
 
 .tagLarge {
-  font-size: 14px;
+  font-size: var(--text-sm);
   padding: 6px 18px 6px 14px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   letter-spacing: 0.06em;
   border: 1px solid;
   display: inline-flex;
@@ -235,13 +235,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(145, 70, 255, 0.1);
-  border: 1px solid rgba(145, 70, 255, 0.32);
+  background: rgba(var(--color-twitch-rgb), 0.1);
+  border: 1px solid rgba(var(--color-twitch-rgb), 0.32);
   color: #bf8fff;
   padding: 14px 22px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   text-decoration: none;
   width: 100%;
   letter-spacing: 0.04em;
@@ -272,9 +272,9 @@
 }
 
 .twitchBtn:hover {
-  background: rgba(145, 70, 255, 0.2);
-  border-color: rgba(145, 70, 255, 0.6);
-  box-shadow: 0 0 24px rgba(145, 70, 255, 0.18);
+  background: rgba(var(--color-twitch-rgb), 0.2);
+  border-color: rgba(var(--color-twitch-rgb), 0.6);
+  box-shadow: 0 0 24px rgba(var(--color-twitch-rgb), 0.18);
   transform: translateY(-1px);
 }
 
@@ -285,7 +285,7 @@
 .twitchIcon {
   width: 20px;
   height: 20px;
-  fill: #9146ff;
+  fill: var(--color-twitch);
   flex-shrink: 0;
 }
 
@@ -336,7 +336,7 @@
 @media (max-width: 600px) {
   .modal {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: var(--radius-xl);
   }
   .body {
     padding: 22px 20px 26px;
@@ -345,6 +345,6 @@
     font-size: 26px;
   }
   .bio {
-    font-size: 14px;
+    font-size: var(--text-sm);
   }
 }
