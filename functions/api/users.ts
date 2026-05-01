@@ -23,7 +23,9 @@ export async function onRequest(ctx: {
 
   const cached = await cache.match(CACHE_KEY)
   if (cached) {
-    return new Response(await cached.text(), { headers: JSON_HEADERS })
+    return new Response(await cached.text(), {
+      headers: { ...JSON_HEADERS, 'Cache-Control': 'max-age=86400' },
+    })
   }
 
   try {
