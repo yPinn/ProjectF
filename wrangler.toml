@@ -5,5 +5,6 @@ pages_build_output_dir = "dist"
 [vars]
 TWITCH_CLIENT_ID = "oavwe4qqkesekjboulah5j5qjnt6o7"
 
-# TWITCH_CLIENT_SECRET 是機密，透過 CF Dashboard > Settings > Secrets 設定
-# 本地開發用 .dev.vars（已加入 .gitignore）
+# 機密透過 CF Dashboard > Settings > Secrets 設定，本地開發用 .dev.vars（已加入 .gitignore）
+# TWITCH_CLIENT_SECRET — Twitch OAuth secret
+# PURGE_SECRET        — 自訂長字串，用於 POST /api/purge 清除 Twitch 快取
