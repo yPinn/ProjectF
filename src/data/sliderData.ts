@@ -19,7 +19,8 @@ const TAG_ICONS: Record<string, TagEntry> = {
   'Delta Force': '/images/games/delta.png',
   Minecraft: '/images/games/minecraft.png',
   'Mahjong Soul': '/images/games/mahjong.png',
-  Singing: '/images/games/singer.png',
+  Singing: '/images/games/singing.png',
+  PUBG: '/images/games/pubg.png',
   Ferrari: '/images/games/ferrari.png',
 }
 
