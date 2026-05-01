@@ -17,18 +17,23 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #0a0a14;
+  background: var(--ss-bg);
   font-family: 'VALORANT', sans-serif;
   font-size: inherit;
-  line-height: var(--lh-base);
-  color: #ccc4ed;
+  line-height: var(--lh-normal);
+  color: var(--t1);
   user-select: none;
 
+  --ss-bg: #0a0a14;
   --ss-left-edge: 2rem; /* 32px */
   --ss-left-col: 3.75rem; /* 60px */
   --ss-bar-h: 5.5rem; /* 88px */
   --ss-header-h: calc(var(--ss-left-edge) + var(--ss-left-col));
   --ss-bottom-info-h: 3rem; /* 48px */
+  --ss-avatar-size: 3.125rem; /* 50px */
+  --ss-nav-thumb-size: 3.875rem; /* 62px */
+  --ss-info-box-h: 10.25rem; /* 164px */
+  --ss-corner-inset: -3px;
 
   --t1: #ccc4ed;
   --t4: #a395df;
@@ -39,21 +44,6 @@
   --ss-hi: color-mix(in srgb, var(--ss-accent) 20%, #fff);
   --ss-mid: var(--ss-accent);
   --ss-lo: color-mix(in srgb, var(--ss-accent) 60%, var(--t1));
-}
-
-/* ─────────────────────────────────────────
-   Cursor
-   ───────────────────────────────────────── */
-.cursor {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  margin-left: -20px;
-  margin-top: -20px;
-  border-radius: 50%;
-  border: 2px solid var(--ss-accent);
-  pointer-events: none;
-  z-index: 1000;
 }
 
 /* ─────────────────────────────────────────
@@ -153,7 +143,7 @@
 .slideIndex::before {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: var(--ss-corner-inset);
   border: 1px solid color-mix(in srgb, var(--ss-accent) 35%, transparent);
   pointer-events: none;
   z-index: 1;
@@ -164,7 +154,7 @@
 .slideIndex::after {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: var(--ss-corner-inset);
   background:
     linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 8px 2px no-repeat,
     linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 2px 8px no-repeat,
@@ -260,7 +250,7 @@
     calc(var(--ss-bar-h) + var(--ss-bottom-info-h)) var(--ss-left-edge);
   display: flex;
   align-items: stretch;
-  background: #0a0a14 no-repeat top center / 100% 100%;
+  background: var(--ss-bg) no-repeat top center / 100% 100%;
   gap: var(--space-5);
   opacity: 0;
   pointer-events: none;
@@ -283,7 +273,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-3);
   padding-bottom: var(--ss-left-col);
 }
 .verticalLabel h6 {
@@ -293,7 +283,7 @@
   letter-spacing: 0.75rem;
   color: var(--ss-lo);
   font-weight: var(--fw-regular);
-  line-height: var(--lh-sung);
+  line-height: var(--lh-snug);
   text-transform: uppercase;
   margin: 0;
 }
@@ -395,9 +385,10 @@
   -webkit-text-fill-color: transparent;
   display: block;
   width: 100%;
-  margin: 0 0 2rem;
+  margin: 0 0 var(--space-8);
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Info box ── */
@@ -408,25 +399,52 @@
     color-mix(in srgb, var(--ss-accent) 20%, transparent) 0%,
     color-mix(in srgb, var(--ss-accent) 9%, transparent) 100%
   );
-  padding: 1.25rem var(--space-6);
+  padding: var(--space-5) var(--space-6);
   display: flex;
   gap: var(--space-4);
   margin: 0 0 var(--space-4);
-  height: 10.25rem;
+  height: var(--ss-info-box-h);
   overflow: hidden;
   box-sizing: border-box;
   flex-shrink: 0;
   align-self: stretch;
 }
 .infoBoxImg {
-  width: 3.125rem;
-  height: 3.125rem;
+  position: relative;
+  width: var(--ss-avatar-size);
+  height: var(--ss-avatar-size);
   flex-shrink: 0;
+}
+.infoBoxImg::before {
+  content: '';
+  position: absolute;
+  inset: var(--ss-corner-inset);
+  border: 1px solid color-mix(in srgb, var(--ss-accent) 35%, transparent);
+  pointer-events: none;
+  z-index: 1;
+  transition: border-color 0.3s var(--ease-out-expo);
+}
+.infoBoxImg::after {
+  content: '';
+  position: absolute;
+  inset: var(--ss-corner-inset);
+  background:
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 6px 2px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 2px 6px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 100% 0 / 6px 2px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 100% 0 / 2px 6px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 0 100% / 6px 2px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 0 100% / 2px 6px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 100% 100% / 6px 2px no-repeat,
+    linear-gradient(var(--ss-accent), var(--ss-accent)) 100% 100% / 2px 6px no-repeat;
+  pointer-events: none;
+  z-index: 2;
 }
 .infoBoxImg img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
 }
 .infoBoxContent h5 {
   font-family: var(--font-body);
@@ -441,7 +459,7 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: var(--fw-regular);
-  line-height: var(--lh-loose);
+  line-height: var(--lh-relaxed);
   color: var(--ss-lo);
   margin: 0;
   display: -webkit-box;
@@ -453,8 +471,8 @@
 /* ── Games grid ── */
 .gamesGrid {
   display: flex;
-  gap: 1.125rem;
-  margin: 0 0 1.75rem;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-7);
   align-self: stretch;
 }
 .gameItem {
@@ -514,7 +532,7 @@ img.gameIcon {
 .ctaBtn {
   --width: 16rem;
   --height: 4rem;
-  --cut: 4rem;
+  --cut: var(--height);
   --accent-color: var(--ss-accent);
 
   appearance: none;
@@ -572,10 +590,10 @@ img.gameIcon {
 .navItem {
   cursor: pointer;
   position: relative;
-  width: 3.875rem;
-  height: 3.875rem;
+  width: var(--ss-nav-thumb-size);
+  height: var(--ss-nav-thumb-size);
   margin-left: auto;
-  margin-bottom: 1.75rem;
+  margin-bottom: var(--space-7);
   flex-shrink: 0;
   opacity: 0.5;
   transition:
@@ -593,7 +611,7 @@ img.gameIcon {
 .navItem::before {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: var(--ss-corner-inset);
   border: 1px solid color-mix(in srgb, var(--ss-accent) 35%, transparent);
   pointer-events: none;
   z-index: 1;
@@ -603,7 +621,7 @@ img.gameIcon {
 .navItem::after {
   content: '';
   position: absolute;
-  inset: -3px;
+  inset: var(--ss-corner-inset);
   background:
     linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 8px 2px no-repeat,
     linear-gradient(var(--ss-accent), var(--ss-accent)) 0 0 / 2px 8px no-repeat,
@@ -841,7 +859,6 @@ img.gameIcon {
   .ctaBtn {
     --width: 14.375rem;
     --height: 3.4375rem;
-    --cut: 3.4375rem;
   }
   .navThumbs {
     width: calc(8% - 10px);
