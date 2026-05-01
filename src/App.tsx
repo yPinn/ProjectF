@@ -14,6 +14,12 @@ import { sliderStreamers } from '@/data/sliderData'
 import peopleData from '@/data/people.json'
 import type { Member, Person } from '@/types'
 
+const NAV_ITEMS = [
+  { label: 'Info', href: '#', active: true },
+  { label: 'Clip', href: '#' },
+  { label: 'Contact', href: '#', target: '_blank', key: 'contact' },
+]
+
 const members = (peopleData as Person[]).filter((p): p is Member => p.section === 'member')
 
 // Evaluated once at module load — safe for this client-only SPA
@@ -107,6 +113,7 @@ export default function App() {
         slides={enrichedSlides}
         logoUrl="/images/logo.png"
         verticalText="Fuck Entertainment"
+        navItems={NAV_ITEMS}
       />
 
       <main id="mainContent" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>

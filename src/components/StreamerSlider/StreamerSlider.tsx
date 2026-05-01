@@ -1,15 +1,19 @@
-import { type CSSProperties, useRef, useEffect } from 'react'
+import { type CSSProperties, useRef, useEffect, useCallback } from 'react'
 import type { StreamerSlideData } from '@/types'
 import { useSlider } from '@/hooks/useSlider'
+import { useAudio } from '@/hooks/useAudio'
+import { useMouseParallax } from '@/hooks/useMouseParallax'
 import styles from './StreamerSlider.module.css'
 
 interface StreamerSliderProps {
   slides: StreamerSlideData[]
   logoUrl?: string
   homeHref?: string
-  navItems?: { label: string; href: string; active?: boolean }[]
+  navItems?: { label: string; href: string; active?: boolean; target?: string; key?: string }[]
   verticalText?: string
   autoPlayMs?: number
+  audioVolume?: number
+  onMenuClick?: () => void
 }
 
 const DEFAULT_NAV = [
@@ -21,7 +25,7 @@ const DEFAULT_NAV = [
 const RAIN_COUNT = 40
 const MAX_GAMES = 4
 const SCROLL_THRESHOLD = 50
-const SCROLL_COOLDOWN = 500 // matches slide opacity transition (450ms) + small buffer
+const SCROLL_COOLDOWN = 550
 
 function StreamerSlider({
   slides,
@@ -30,31 +34,46 @@ function StreamerSlider({
   navItems = DEFAULT_NAV,
   verticalText = 'FUCK ENTERTAINMENT',
   autoPlayMs = 0,
+  audioVolume = 0.85,
+  onMenuClick,
 }: StreamerSliderProps) {
   const { current, goTo, goNext, goPrev } = useSlider({ total: slides.length, autoPlayMs })
   const activeSlide = slides[current]
   const rootRef = useRef<HTMLDivElement>(null)
+  useMouseParallax(rootRef, 14)
+  const { play } = useAudio()
   const currentRef = useRef(current)
   useEffect(() => {
     currentRef.current = current
   }, [current])
 
+  const flashElem = useRef<HTMLDivElement>(null)
+  const transitionBusy = useRef(false)
+  const triggerFlash = useCallback((action: () => void) => {
+    if (transitionBusy.current) return
+    transitionBusy.current = true
+    action()
+    flashElem.current?.classList.add(styles.flashActive)
+    setTimeout(() => flashElem.current?.classList.remove(styles.flashActive), 200)
+    setTimeout(() => {
+      transitionBusy.current = false
+    }, 550)
+  }, [])
+
   useEffect(() => {
     const el = rootRef.current
     if (!el) return
-    let busy = false
     let acc = 0
-    let pendingDir = 0 // stores one queued direction while transition is in flight
+    let pendingDir = 0
 
     function trigger(dir: number) {
-      busy = true
       pendingDir = 0
-      if (dir > 0) goNext()
-      else goPrev()
+      triggerFlash(() => {
+        if (dir > 0) goNext()
+        else goPrev()
+      })
       setTimeout(() => {
-        busy = false
         acc = 0
-        // Apply queued input immediately after cooldown
         if (pendingDir !== 0) {
           const d = pendingDir
           pendingDir = 0
@@ -77,15 +96,15 @@ function StreamerSlider({
       const cur = currentRef.current
       if ((dir > 0 && cur >= slides.length - 1) || (dir < 0 && cur <= 0)) return
       e.preventDefault()
-      if (busy) {
-        pendingDir = dir // queue one step; repeated input overwrites (last intent wins)
+      if (transitionBusy.current) {
+        pendingDir = dir // last intent wins
         return
       }
       trigger(dir)
     }
     el.addEventListener('wheel', handler, { passive: false })
     return () => el.removeEventListener('wheel', handler)
-  }, [slides.length, goNext, goPrev])
+  }, [slides.length, goNext, goPrev, triggerFlash])
 
   const navWin = Math.min(5, slides.length)
   const navStart = Math.max(0, Math.min(current - Math.floor(navWin / 2), slides.length - navWin))
@@ -127,30 +146,59 @@ function StreamerSlider({
                 )}
               </div>
             </a>
-            <nav className={styles.headerMenu}>
-              <ul>
-                {navItems.map((item) => (
-                  <li key={item.label} className={item.active ? styles.active : ''}>
-                    <a href={item.href}>{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className={styles.headerRight}>
+              <nav className={styles.headerMenu}>
+                <ul>
+                  {navItems.map((item) => (
+                    <li key={item.label} className={item.active ? styles.active : ''}>
+                      <a
+                        href={
+                          item.key === 'contact' ? (activeSlide.contactUrl ?? item.href) : item.href
+                        }
+                        target={item.target}
+                        rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <button
+                type="button"
+                className={styles.hamburger}
+                onClick={onMenuClick}
+                aria-label="開啟選單"
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
       <section className={styles.bannerSection}>
         <div className={styles.bannerInner}>
+          <div className={styles.bgLayer} aria-hidden="true">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`${styles.bgItem}${index === current ? ` ${styles.bgActive}` : ''}`}
+                style={
+                  slide.backgroundImage
+                    ? { backgroundImage: `url('${slide.backgroundImage}')` }
+                    : undefined
+                }
+              />
+            ))}
+          </div>
+
           {slides.map((slide, index) => (
             <div
               key={slide.id}
               className={`${styles.slide}${index === current ? ` ${styles.active}` : ''}`}
-              style={
-                slide.backgroundImage
-                  ? { backgroundImage: `url('${slide.backgroundImage}')` }
-                  : undefined
-              }
               aria-hidden={index !== current}
             >
               <div className={styles.verticalLabel}>
@@ -169,12 +217,24 @@ function StreamerSlider({
                   />
                 )}
                 <div className={styles.mainImg}>
-                  <img
-                    src={slide.photo}
-                    alt={slide.name}
-                    loading={index === current ? 'eager' : 'lazy'}
-                    decoding="async"
-                  />
+                  <div
+                    className={styles.parallaxLayer}
+                    onClick={() => slide.audioSrc && play(slide.audioSrc, audioVolume)}
+                    style={
+                      {
+                        cursor: slide.audioSrc ? 'pointer' : 'default',
+                        '--photo-url': `url('${slide.photo}')`,
+                      } as CSSProperties
+                    }
+                  >
+                    <img
+                      src={slide.photo}
+                      alt={slide.name}
+                      loading={index === current ? 'eager' : 'lazy'}
+                      decoding="async"
+                      draggable={false}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -216,8 +276,8 @@ function StreamerSlider({
                                   role="img"
                                   aria-label={game.name}
                                   style={{
-                                    maskImage: `url(${game.icon})`,
-                                    WebkitMaskImage: `url(${game.icon})`,
+                                    maskImage: `url('${game.icon}')`,
+                                    WebkitMaskImage: `url('${game.icon}')`,
                                   }}
                                 />
                               )}
@@ -238,6 +298,8 @@ function StreamerSlider({
           ))}
         </div>
 
+        <div ref={flashElem} className={styles.flash} aria-hidden="true" />
+
         <nav className={styles.navThumbs} aria-label="Slide navigation">
           <div className={styles.navThumbsInner}>
             {navSlides.map((slide, wi) => {
@@ -247,7 +309,7 @@ function StreamerSlider({
                   key={slide.id}
                   type="button"
                   className={`${styles.navItem}${index === current ? ` ${styles.active}` : ''}`}
-                  onClick={() => goTo(index)}
+                  onClick={() => triggerFlash(() => goTo(index))}
                   aria-label={`Go to ${slide.name}`}
                   aria-current={index === current ? 'true' : undefined}
                 >

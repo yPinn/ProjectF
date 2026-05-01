@@ -54,4 +54,6 @@ export interface StreamerSlideData {
   ctaLabel: string
   onCtaClick?: () => void
   accentColor?: string
+  audioSrc?: string
+  contactUrl?: string
 }

@@ -1,6 +1,7 @@
 import type { Streamer, StreamerSlideData } from '@/types'
 import { twitchUrl } from '@/utils/url'
 import peopleData from './people.json'
+import links from './links.json'
 
 const streamersData = (peopleData as import('@/types').Person[]).filter(
   (p): p is Streamer => p.section === 'slider',
@@ -17,7 +18,7 @@ const TAG_ICONS: Record<string, TagEntry> = {
   ETS2: { src: '/images/games/ets2.png', raw: true },
   BMW: '/images/games/bmw.png',
   'Delta Force': '/images/games/delta.png',
-  Minecraft: '/images/games/minecraft.png',
+  Minecraft: { src: '/images/games/minecraft.png', raw: true },
   'Mahjong Soul': '/images/games/mahjong.png',
   Singing: '/images/games/singing.png',
   PUBG: '/images/games/pubg.png',
@@ -44,6 +45,8 @@ export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => ({
         ? { name: tag, icon: entry }
         : { name: tag, icon: entry.src, raw: true }
     }),
+  audioSrc: s.audio || undefined,
+  contactUrl: links.discord[s.username as keyof typeof links.discord] || undefined,
   ctaLabel: 'Watch Live',
   onCtaClick: () => window.open(twitchUrl(s.username), '_blank'),
 }))

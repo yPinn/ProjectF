@@ -23,15 +23,16 @@
   line-height: var(--lh-normal);
   color: var(--t1);
   user-select: none;
+  transition: background 0.7s var(--ease-out-expo);
 
-  --ss-bg: #0a0a14;
+  --ss-bg: color-mix(in srgb, var(--ss-accent) 7%, #000000);
   --ss-left-edge: 2rem; /* 32px */
   --ss-left-col: 3.75rem; /* 60px */
   --ss-bar-h: 5.5rem; /* 88px */
   --ss-header-h: calc(var(--ss-left-edge) + var(--ss-left-col));
   --ss-bottom-info-h: 3rem; /* 48px */
   --ss-avatar-size: 3.125rem; /* 50px */
-  --ss-nav-thumb-size: 3.875rem; /* 62px */
+  --ss-nav-thumb-size: var(--ss-left-col); /* 60px, 與 logo 同尺寸 */
   --ss-info-box-h: 10.25rem; /* 164px */
   --ss-corner-inset: -3px;
 
@@ -66,6 +67,23 @@
 }
 
 /* ─────────────────────────────────────────
+   Full-page flash transition overlay
+   ───────────────────────────────────────── */
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 400;
+  transition: opacity 0.35s ease;
+}
+.flashActive {
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+/* ─────────────────────────────────────────
    Slide index
    ───────────────────────────────────────── */
 .slideIndex {
@@ -79,7 +97,7 @@
   justify-content: center;
   writing-mode: horizontal-tb;
   font-family: 'VALORANT', sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(1.25rem, 2vw, 2.5rem);
   font-weight: var(--fw-bold);
   color: color-mix(in srgb, var(--ss-accent) 25%, transparent);
   letter-spacing: 0.05em;
@@ -111,7 +129,8 @@
 .headerInner {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  height: var(--ss-left-col);
 }
 
 .headerLogoLink {
@@ -166,18 +185,41 @@
     linear-gradient(var(--ss-accent), var(--ss-accent)) 100% 100% / 2px 8px no-repeat;
   pointer-events: none;
   z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+.headerLogoLink:hover .headerLogo::before {
+  border-color: color-mix(in srgb, var(--ss-accent) 80%, transparent);
+}
+.headerLogoLink:hover .headerLogo::after {
+  opacity: 1;
+}
+.headerLogoLink:hover .headerLogoImg {
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--ss-accent) 70%, transparent));
 }
 
 .headerLogoText {
   font-family: 'Insomnia', sans-serif;
-  font-size: 1.75rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.75rem);
   color: var(--ss-accent);
   line-height: 1;
 }
 
-.headerMenu {
+.headerRight {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-10);
   flex: 1;
+  justify-content: flex-end;
+  height: 100%;
 }
+
+.headerMenu {
+  align-self: center;
+  padding-top: 0.5rem;
+}
+
 .headerMenu ul {
   display: flex;
   gap: var(--space-10);
@@ -186,9 +228,43 @@
   padding: 0;
   margin: 0;
 }
+
+/* ── Hamburger ── */
+.hamburger {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: var(--ss-left-col);
+  height: var(--ss-left-col);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: color-mix(in srgb, var(--ss-accent) 80%, transparent);
+  transition:
+    background 0.3s var(--ease-out-expo),
+    transform 0.3s var(--ease-out-expo);
+}
+.hamburger:hover span {
+  background: var(--ss-accent);
+}
+.hamburger:hover span:first-child {
+  transform: translateX(4px);
+}
+.hamburger:hover span:last-child {
+  transform: translateX(-4px);
+}
 .headerMenu ul li a {
   position: relative;
-  font-size: var(--text-sm);
+  font-size: clamp(var(--text-base), 2vw, var(--text-2xl));
   line-height: var(--lh-snug);
   font-weight: var(--fw-medium);
   text-transform: uppercase;
@@ -243,6 +319,26 @@
   inset: 0;
 }
 
+/* ─────────────────────────────────────────
+   Background crossfade layer
+   ───────────────────────────────────────── */
+.bgLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.bgItem {
+  position: absolute;
+  inset: 0;
+  background: var(--ss-bg) no-repeat top center / 100% 100%;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+  will-change: opacity;
+}
+.bgItem.bgActive {
+  opacity: 1;
+}
+
 .slide {
   position: absolute;
   inset: 0;
@@ -250,12 +346,13 @@
     calc(var(--ss-bar-h) + var(--ss-bottom-info-h)) var(--ss-left-edge);
   display: flex;
   align-items: stretch;
-  background: var(--ss-bg) no-repeat top center / 100% 100%;
+  background: transparent;
   gap: var(--space-5);
   opacity: 0;
   pointer-events: none;
   will-change: opacity;
-  transition: opacity 0.45s var(--ease-out-expo);
+  transition: opacity 0.3s var(--ease-out-expo);
+  z-index: 1;
 }
 .slide.active {
   opacity: 1;
@@ -328,15 +425,26 @@
 }
 .slide.active .characterImg .mainImg {
   opacity: 1;
-  animation: characterIn 0.5s var(--ease-out-expo) 0.05s both;
 }
-@keyframes characterIn {
-  from {
-    transform: translateX(6%);
-  }
-  to {
-    transform: translateX(0);
-  }
+
+.parallaxLayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translate(var(--px, 0px), var(--py, 0px));
+  will-change: transform;
+}
+.parallaxLayer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--photo-url) no-repeat center / contain;
+  transform: translateX(-1rem);
+  filter: saturate(0) contrast(3) brightness(0.25) blur(5px) drop-shadow(0 0 20px var(--ss-accent));
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: -1;
+  transition: filter 0.6s var(--ease-out-expo);
 }
 
 .characterImg img {
@@ -345,6 +453,8 @@
   object-fit: contain;
   object-position: center center;
   display: block;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* ─────────────────────────────────────────
