@@ -37,6 +37,8 @@ export default function MemberCard({ member, index, status }: Props) {
               src={member.photo}
               alt={member.name ?? member.username}
               className={styles.avatarImg}
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 ;(e.target as HTMLImageElement).style.display = 'none'
               }}

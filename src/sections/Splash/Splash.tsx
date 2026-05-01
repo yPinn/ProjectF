@@ -4,37 +4,44 @@ import styles from './Splash.module.css'
 
 export default function Splash() {
   const contentRef = useRef<HTMLDivElement>(null)
-  const glowTopRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let ticking = false
-    const onScroll = () => {
-      if (ticking) return
-      requestAnimationFrame(() => {
-        const y = window.scrollY
+    let rafId: number
+    let prevY = -1
+
+    function tick() {
+      const y = window.scrollY
+      if (y !== prevY) {
+        prevY = y
         if (contentRef.current) {
           contentRef.current.style.transform = `translateY(${y * 0.35}px)`
           contentRef.current.style.opacity = String(Math.max(0, 1 - y / 400))
         }
-        if (glowTopRef.current) {
-          glowTopRef.current.style.transform = `translateX(-50%) translateY(${y * 0.15}px)`
-        }
         if (gridRef.current) {
           gridRef.current.style.transform = `translateY(${y * 0.08}px)`
         }
-        ticking = false
-      })
-      ticking = true
+      }
+      rafId = requestAnimationFrame(tick)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+
+    const onVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(rafId)
+      else rafId = requestAnimationFrame(tick)
+    }
+
+    document.addEventListener('visibilitychange', onVisibility)
+    rafId = requestAnimationFrame(tick)
+    return () => {
+      cancelAnimationFrame(rafId)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
   }, [])
 
   return (
     <section className={styles.splash} id="splash">
       <div ref={gridRef} className={styles.bgGrid} />
-      <div ref={glowTopRef} className={styles.glowTop} />
+      <div className={styles.glowTop} />
       <div className={styles.glowBottom} />
       <Particles />
 

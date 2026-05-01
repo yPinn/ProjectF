@@ -6,6 +6,7 @@ import styles from './StreamerSlider.module.css'
 interface StreamerSliderProps {
   slides: StreamerSlideData[]
   logoUrl?: string
+  homeHref?: string
   navItems?: { label: string; href: string; active?: boolean }[]
   verticalText?: string
   autoPlayMs?: number
@@ -20,11 +21,12 @@ const DEFAULT_NAV = [
 const RAIN_COUNT = 40
 const MAX_GAMES = 4
 const SCROLL_THRESHOLD = 50
-const SCROLL_COOLDOWN = 600
+const SCROLL_COOLDOWN = 500 // matches slide opacity transition (450ms) + small buffer
 
 function StreamerSlider({
   slides,
   logoUrl,
+  homeHref = '#splash',
   navItems = DEFAULT_NAV,
   verticalText = 'FUCK ENTERTAINMENT',
   autoPlayMs = 0,
@@ -42,6 +44,28 @@ function StreamerSlider({
     if (!el) return
     let busy = false
     let acc = 0
+    let pendingDir = 0 // stores one queued direction while transition is in flight
+
+    function trigger(dir: number) {
+      busy = true
+      pendingDir = 0
+      if (dir > 0) goNext()
+      else goPrev()
+      setTimeout(() => {
+        busy = false
+        acc = 0
+        // Apply queued input immediately after cooldown
+        if (pendingDir !== 0) {
+          const d = pendingDir
+          pendingDir = 0
+          const cur = currentRef.current
+          if (!((d > 0 && cur >= slides.length - 1) || (d < 0 && cur <= 0))) {
+            trigger(d)
+          }
+        }
+      }, SCROLL_COOLDOWN)
+    }
+
     const handler = (e: WheelEvent) => {
       acc += e.deltaY
       if (Math.abs(acc) < SCROLL_THRESHOLD) {
@@ -53,14 +77,11 @@ function StreamerSlider({
       const cur = currentRef.current
       if ((dir > 0 && cur >= slides.length - 1) || (dir < 0 && cur <= 0)) return
       e.preventDefault()
-      if (busy) return
-      busy = true
-      if (dir > 0) goNext()
-      else goPrev()
-      setTimeout(() => {
-        busy = false
-        acc = 0
-      }, SCROLL_COOLDOWN)
+      if (busy) {
+        pendingDir = dir // queue one step; repeated input overwrites (last intent wins)
+        return
+      }
+      trigger(dir)
     }
     el.addEventListener('wheel', handler, { passive: false })
     return () => el.removeEventListener('wheel', handler)
@@ -93,17 +114,19 @@ function StreamerSlider({
       <header className={styles.header}>
         <div className={styles.container}>
           <div className={styles.headerInner}>
-            <div className={styles.headerLogo}>
-              {logoUrl ? (
-                <span
-                  className={styles.headerLogoImg}
-                  style={{ maskImage: `url('${logoUrl}')`, WebkitMaskImage: `url('${logoUrl}')` }}
-                  aria-hidden="true"
-                />
-              ) : (
-                <span className={styles.headerLogoText}>FE</span>
-              )}
-            </div>
+            <a href={homeHref} className={styles.headerLogoLink} aria-label="回到首頁">
+              <div className={styles.headerLogo}>
+                {logoUrl ? (
+                  <span
+                    className={styles.headerLogoImg}
+                    style={{ maskImage: `url('${logoUrl}')`, WebkitMaskImage: `url('${logoUrl}')` }}
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <span className={styles.headerLogoText}>FE</span>
+                )}
+              </div>
+            </a>
             <nav className={styles.headerMenu}>
               <ul>
                 {navItems.map((item) => (
@@ -146,7 +169,12 @@ function StreamerSlider({
                   />
                 )}
                 <div className={styles.mainImg}>
-                  <img src={slide.photo} alt={slide.name} />
+                  <img
+                    src={slide.photo}
+                    alt={slide.name}
+                    loading={index === current ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
                 </div>
               </div>
 
@@ -156,7 +184,12 @@ function StreamerSlider({
 
                 <div className={styles.infoBox}>
                   <div className={styles.infoBoxImg}>
-                    <img src={slide.navThumbnail} alt={slide.name} />
+                    <img
+                      src={slide.navThumbnail}
+                      alt={slide.name}
+                      loading={index === current ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
                   </div>
                   <div className={styles.infoBoxContent}>
                     <h5>{slide.category}</h5>

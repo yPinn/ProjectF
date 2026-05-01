@@ -70,7 +70,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const streamStatuses = useStreamStatus()
+  const { statuses: streamStatuses, loading: streamLoading } = useStreamStatus()
   const twitchProfiles = useTwitchProfiles()
 
   const enrichedSlides = useMemo(
@@ -128,7 +128,7 @@ export default function App() {
                 key={m.username}
                 member={m}
                 index={i}
-                status={streamStatuses[m.username]}
+                status={streamLoading ? undefined : streamStatuses[m.username]}
               />
             ))}
           </div>

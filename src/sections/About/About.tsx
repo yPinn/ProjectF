@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from '@/hooks/useInView'
 import styles from './About.module.css'
+import peopleData from '@/data/people.json'
+
+const MEMBER_COUNT = peopleData.filter((p) => p.section === 'slider').length
 
 const STATS = [
-  { value: 8, label: '核心成員' },
+  { value: MEMBER_COUNT, label: '核心成員' },
   { value: 2026, label: '創立年份' },
   { value: 24, label: '小時不斷電' },
   { value: '∞', label: '廢話無上限' },
@@ -22,12 +25,14 @@ function StatCard({ value, label }: { value: number | string; label: string }) {
     const numValue = value
     const duration = 1200
     const start = performance.now()
+    let rafId: number
     function tick(now: number) {
       const ease = 1 - Math.pow(1 - Math.min((now - start) / duration, 1), 3)
       setCount(Math.round(ease * numValue))
-      if (ease < 1) requestAnimationFrame(tick)
+      if (ease < 1) rafId = requestAnimationFrame(tick)
     }
-    requestAnimationFrame(tick)
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
   }, [inView, value])
 
   return (

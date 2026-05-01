@@ -136,17 +136,43 @@ export default function Cursor({
     gl.uniform3f(u.u_main_color, ...mainColor)
     gl.uniform3f(u.u_border_color, ...borderColor)
 
-    // Trail particles
+    // Trail particles — sprites pre-rendered, rebuilt only on resize
     const dotR = (i: number) => size * innerHeight * (1 - 0.2 * ((3 * i) / tailDots - 1) ** 2)
-    const trail = Array.from({ length: tailDots }, (_, i) => ({
-      x: 0.25 * innerWidth,
-      y: 0.8 * innerHeight,
-      vx: 0,
-      vy: 0,
-      opacity: 0.04 + 0.3 * (1 - i / tailDots) ** 4,
-      bordered: 0.6 * (1 - i / tailDots),
-      r: dotR(i),
-    }))
+
+    function makeTrailSprite(opacity: number, bordered: number, r: number): HTMLCanvasElement {
+      const dim = Math.ceil(r * 2) + 2
+      const offscreen = document.createElement('canvas')
+      offscreen.width = dim
+      offscreen.height = dim
+      const oc = offscreen.getContext('2d')!
+      const cx = dim / 2
+      const g = oc.createRadialGradient(cx, cx, r * bordered, cx, cx, r)
+      g.addColorStop(0, `rgba(255,255,255,${opacity})`)
+      g.addColorStop(1, 'rgba(255,255,255,0)')
+      oc.fillStyle = g
+      oc.beginPath()
+      oc.arc(cx, cx, r, 0, Math.PI * 2)
+      oc.fill()
+      return offscreen
+    }
+
+    const trail = Array.from({ length: tailDots }, (_, i) => {
+      const opacity = 0.04 + 0.3 * (1 - i / tailDots) ** 4
+      const bordered = 0.6 * (1 - i / tailDots)
+      const r = dotR(i)
+      const sprite = makeTrailSprite(opacity, bordered, r)
+      return {
+        x: 0.25 * innerWidth,
+        y: 0.8 * innerHeight,
+        vx: 0,
+        vy: 0,
+        opacity,
+        bordered,
+        r,
+        sprite,
+        spriteHalf: sprite.width / 2,
+      }
+    })
 
     // Mouse state
     const mouse = { x: 0.25, y: 0.8, tX: 0.25, tY: 0.8, moving: false }
@@ -158,12 +184,15 @@ export default function Cursor({
     const resize = () => {
       canvas.width = innerWidth * dpr
       canvas.height = innerHeight * dpr
-      tex.width = innerWidth
-      tex.height = innerHeight
+      // Half-res texture — 4× less GPU upload bandwidth, visually transparent since trail is blurry
+      tex.width = Math.ceil(innerWidth * 0.5)
+      tex.height = Math.ceil(innerHeight * 0.5)
       gl.viewport(0, 0, canvas.width, canvas.height)
       gl.uniform1f(u.u_ratio, canvas.width / canvas.height)
       trail.forEach((p, i) => {
         p.r = dotR(i)
+        p.sprite = makeTrailSprite(p.opacity, p.bordered, p.r)
+        p.spriteHalf = p.sprite.width / 2
       })
     }
     resize()
@@ -185,9 +214,11 @@ export default function Cursor({
       mouse.x += (mouse.tX - mouse.x) * 0.1
       mouse.y += (mouse.tY - mouse.y) * 0.1
 
-      // Draw trail to texture
+      // Draw trail to half-res texture — physics in full-resolution coords, canvas scaled 0.5×
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.fillStyle = 'black'
       ctx.fillRect(0, 0, tex.width, tex.height)
+      ctx.setTransform(0.5, 0, 0, 0.5, 0, 0)
       const mx = mouse.x * innerWidth,
         my = mouse.y * innerHeight
       for (let i = 0; i < trail.length; i++) {
@@ -202,14 +233,9 @@ export default function Cursor({
           p.x += p.vx
           p.y += p.vy
         }
-        const g = ctx.createRadialGradient(p.x, p.y, p.r * p.bordered, p.x, p.y, p.r)
-        g.addColorStop(0, `rgba(255,255,255,${p.opacity})`)
-        g.addColorStop(1, 'rgba(255,255,255,0)')
-        ctx.beginPath()
-        ctx.fillStyle = g
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fill()
+        ctx.drawImage(p.sprite, p.x - p.spriteHalf, p.y - p.spriteHalf)
       }
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
 
       // Render
       gl.uniform1f(u.u_time, now)
@@ -265,10 +291,16 @@ export default function Cursor({
     const onTouch = (e: TouchEvent) =>
       onMove(e.targetTouches[0].clientX, e.targetTouches[0].clientY)
 
+    const onVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(rafId)
+      else rafId = requestAnimationFrame(loop)
+    }
+
     window.addEventListener('mousemove', onMouse)
     window.addEventListener('touchmove', onTouch, { passive: true })
     window.addEventListener('click', onMouse)
     window.addEventListener('resize', resize)
+    document.addEventListener('visibilitychange', onVisibility)
 
     return () => {
       cancelAnimationFrame(rafId)
@@ -277,6 +309,7 @@ export default function Cursor({
       window.removeEventListener('touchmove', onTouch)
       window.removeEventListener('click', onMouse)
       window.removeEventListener('resize', resize)
+      document.removeEventListener('visibilitychange', onVisibility)
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 

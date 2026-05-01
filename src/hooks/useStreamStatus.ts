@@ -3,8 +3,15 @@ import type { StreamStatus } from '@/types'
 
 export type StreamStatusMap = Record<string, StreamStatus>
 
-export function useStreamStatus(): StreamStatusMap {
+export interface StreamStatusResult {
+  statuses: StreamStatusMap
+  /** true until the first fetch completes (success or failure) */
+  loading: boolean
+}
+
+export function useStreamStatus(): StreamStatusResult {
   const [statuses, setStatuses] = useState<StreamStatusMap>({})
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -15,6 +22,8 @@ export function useStreamStatus(): StreamStatusMap {
         if (res.ok && !cancelled) setStatuses(await res.json())
       } catch {
         // Network error — keep previous state, silent fail
+      } finally {
+        if (!cancelled) setLoading(false)
       }
     }
 
@@ -26,5 +35,5 @@ export function useStreamStatus(): StreamStatusMap {
     }
   }, [])
 
-  return statuses
+  return { statuses, loading }
 }
