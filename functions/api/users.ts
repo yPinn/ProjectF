@@ -19,7 +19,8 @@ export async function onRequest(ctx: {
 }): Promise<Response> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cache: Cache = (caches as any).default
-  const CACHE_KEY = 'https://twitch-cache.internal/users'
+  const usersHash = ALL_USERNAMES.slice().sort().join(',')
+  const CACHE_KEY = `https://twitch-cache.internal/users?v=${encodeURIComponent(usersHash)}`
 
   const cached = await cache.match(CACHE_KEY)
   if (cached) {
