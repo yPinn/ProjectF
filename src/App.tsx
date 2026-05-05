@@ -49,24 +49,6 @@ export default function App() {
         navItems={NAV_ITEMS}
       />
 
-      <main id="mainContent" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
-        <footer
-          style={{
-            position: 'relative',
-            zIndex: 'var(--z-content)',
-            textAlign: 'center',
-            padding: 28,
-            borderTop: '1px solid var(--color-border)',
-            fontSize: 11,
-            color: 'var(--color-muted)',
-            letterSpacing: '0.18em',
-            marginTop: 20,
-            overflow: 'hidden',
-          }}
-        >
-          © 2026 法克娛樂 FUCK ENTERTAINMENT &nbsp;／&nbsp; ALL RIGHTS RESERVED
-        </footer>
-      </main>
     </>
   )
 }
