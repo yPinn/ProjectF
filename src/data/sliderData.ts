@@ -3,9 +3,7 @@ import { twitchUrl } from '@/utils/url'
 import peopleData from './people.json'
 import links from './links.json'
 
-const streamersData = (peopleData as import('@/types').Person[]).filter(
-  (p): p is Streamer => p.section === 'slider',
-)
+const streamersData = peopleData as Streamer[]
 
 type TagEntry = string | { src: string; raw: true }
 
@@ -27,26 +25,29 @@ const TAG_ICONS: Record<string, TagEntry> = {
 
 const BIO_MAX_CHARS = 200
 
-export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => ({
-  id: s.username,
-  accentColor: s.color,
-  navThumbnail: s.photo ?? '/images/logo.png',
-  photo: s.photo ?? '/images/logo.png',
-  handle: `@${s.username}`,
-  name: s.username,
-  category: s.title,
-  bio: s.bio.length > BIO_MAX_CHARS ? s.bio.slice(0, BIO_MAX_CHARS) + '…' : s.bio,
-  games: s.tags
-    .filter((tag) => TAG_ICONS[tag])
-    .slice(0, 4)
-    .map((tag) => {
-      const entry = TAG_ICONS[tag]
-      return typeof entry === 'string'
-        ? { name: tag, icon: entry }
-        : { name: tag, icon: entry.src, raw: true }
-    }),
-  audioSrc: s.audio || undefined,
-  contactUrl: links.discord[s.username as keyof typeof links.discord] || undefined,
-  ctaLabel: 'Watch Live',
-  onCtaClick: () => window.open(twitchUrl(s.username), '_blank'),
-}))
+export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => {
+  const photo = s.photo ?? '/images/logo.png'
+  return {
+    id: s.username,
+    accentColor: s.color,
+    navThumbnail: photo,
+    photo,
+    handle: `@${s.username}`,
+    name: s.username,
+    category: s.title,
+    bio: s.bio.length > BIO_MAX_CHARS ? s.bio.slice(0, BIO_MAX_CHARS) + '…' : s.bio,
+    games: s.tags
+      .filter((tag) => TAG_ICONS[tag])
+      .slice(0, 4)
+      .map((tag) => {
+        const entry = TAG_ICONS[tag]
+        return typeof entry === 'string'
+          ? { name: tag, icon: entry }
+          : { name: tag, icon: entry.src, raw: true }
+      }),
+    audioSrc: s.audio || undefined,
+    contactUrl: links.discord[s.username as keyof typeof links.discord] || undefined,
+    ctaLabel: 'Watch Live',
+    onCtaClick: () => window.open(twitchUrl(s.username), '_blank', 'noopener,noreferrer'),
+  }
+})

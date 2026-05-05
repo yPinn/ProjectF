@@ -9,13 +9,5 @@
     "bio": "個人介紹",
     "tags": ["League of Legends", "Valorant"],
     "audio": "/audio/twitch_account.mp3"
-  },
-  {
-    "_comment": "Member card only — section must be 'member', bio/title/audio not needed",
-    "username": "twitch_account",
-    "photo": "/images/members/twitch_account.png",
-    "section": "member",
-    "color": "#00f5ff",
-    "tags": ["League of Legends"]
   }
 ]

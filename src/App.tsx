@@ -4,15 +4,10 @@ import Cursor from '@/components/Cursor/Cursor'
 import Starfield from '@/components/Starfield/Starfield'
 import Splash from '@/sections/Splash/Splash'
 import About from '@/sections/About/About'
-import MemberCard from '@/components/MemberCard/MemberCard'
-import { useInView } from '@/hooks/useInView'
-import { useStreamStatus } from '@/hooks/useStreamStatus'
 import { useTwitchProfiles } from '@/hooks/useTwitchProfiles'
 
 import StreamerSlider from '@/components/StreamerSlider/StreamerSlider'
 import { sliderStreamers } from '@/data/sliderData'
-import peopleData from '@/data/people.json'
-import type { Member, Person } from '@/types'
 
 const NAV_ITEMS = [
   { label: 'Info', href: '#', active: true },
@@ -20,63 +15,10 @@ const NAV_ITEMS = [
   { label: 'Contact', href: '#', target: '_blank', key: 'contact' },
 ]
 
-const members = (peopleData as Person[]).filter((p): p is Member => p.section === 'member')
-
 // Evaluated once at module load — safe for this client-only SPA
 const isMouseDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  const { ref, inView } = useInView()
-  return (
-    <div
-      ref={ref}
-      style={{
-        textAlign: 'center',
-        marginBottom: 36,
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 20,
-        opacity: inView ? 1 : 0,
-        transform: inView ? 'translateY(0)' : 'translateY(28px)',
-        transition: 'opacity 0.7s ease, transform 0.7s ease',
-      }}
-    >
-      <span
-        style={{
-          flex: 1,
-          height: 1,
-          background: 'linear-gradient(90deg, transparent, var(--color-border))',
-          display: 'block',
-        }}
-      />
-      <h2
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 20,
-          fontWeight: 600,
-          color: 'var(--color-muted)',
-          letterSpacing: '0.28em',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {children}
-      </h2>
-      <span
-        style={{
-          flex: 1,
-          height: 1,
-          background: 'linear-gradient(270deg, transparent, var(--color-border))',
-          display: 'block',
-        }}
-      />
-    </div>
-  )
-}
-
 export default function App() {
-  const { statuses: streamStatuses, loading: streamLoading } = useStreamStatus()
   const twitchProfiles = useTwitchProfiles()
 
   const enrichedSlides = useMemo(
@@ -90,15 +32,6 @@ export default function App() {
           navThumbnail: profile.profileImageUrl,
         }
       }),
-    [twitchProfiles],
-  )
-
-  const enrichedMembers = useMemo(
-    () =>
-      members.map((m) => ({
-        ...m,
-        name: twitchProfiles[m.username]?.displayName ?? m.username,
-      })),
     [twitchProfiles],
   )
 
@@ -117,30 +50,6 @@ export default function App() {
       />
 
       <main id="mainContent" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
-        {/* Members */}
-        <section style={{ maxWidth: 1060, margin: '0 auto', padding: '0 24px 60px' }}>
-          <SectionLabel>
-            <strong>亂源</strong>
-            {'　'}MEMBER
-          </SectionLabel>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: 16,
-            }}
-          >
-            {enrichedMembers.map((m, i) => (
-              <MemberCard
-                key={m.username}
-                member={m}
-                index={i}
-                status={streamLoading ? undefined : streamStatuses[m.username]}
-              />
-            ))}
-          </div>
-        </section>
-
         <footer
           style={{
             position: 'relative',

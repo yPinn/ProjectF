@@ -11,20 +11,8 @@ export interface Streamer {
   audio: string
 }
 
-export interface Member {
-  username: string
-  /** Populated at runtime from Twitch display_name; falls back to username */
-  name?: string
-  photo?: string
-  color: string
-  tags: string[]
-  section: 'member'
-}
-
 /** Mascot is now merged into Streamer */
 export type Mascot = Streamer
-
-export type Person = Streamer | Member
 
 export type TagIconMap = Record<string, string>
 
