@@ -978,3 +978,43 @@ img.gameIcon {
     height: 2.625rem;
   }
 }
+
+@media (max-width: 640px) {
+  .navThumbs {
+    display: none;
+  }
+
+  .slide {
+    padding-right: var(--ss-left-edge);
+  }
+
+  /* Character image becomes a low-opacity background watermark */
+  .characterImg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* Content takes full slide width, above the background image */
+  .content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .content h1 {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .infoBox {
+    height: auto;
+  }
+
+  .ctaBtn {
+    --width: 100%;
+    --height: 3rem;
+  }
+}

@@ -12,10 +12,12 @@ export function useTwitchProfiles(): TwitchProfileMap {
   const [profiles, setProfiles] = useState<TwitchProfileMap>({})
 
   useEffect(() => {
-    fetch('/api/users')
+    const controller = new AbortController()
+    fetch('/api/users', { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data: TwitchProfileMap) => setProfiles(data))
       .catch(() => {})
+    return () => controller.abort()
   }, [])
 
   return profiles
