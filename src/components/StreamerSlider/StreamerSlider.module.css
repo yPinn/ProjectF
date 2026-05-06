@@ -72,15 +72,15 @@
 .flash {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: #000;
   opacity: 0;
   pointer-events: none;
-  z-index: 400;
-  transition: opacity 0.35s ease;
+  z-index: 500;
+  transition: opacity 0.35s ease-out;
 }
 .flashActive {
-  opacity: 0.7;
-  transition: opacity 0.15s ease;
+  opacity: 0.75;
+  transition: opacity 0.1s ease-in;
 }
 
 /* ─────────────────────────────────────────
@@ -332,7 +332,7 @@
   inset: 0;
   background: var(--ss-bg) no-repeat top center / 100% 100%;
   opacity: 0;
-  transition: opacity 0.3s var(--ease-out-expo);
+  transition: opacity 0.35s var(--ease-out-expo);
   will-change: opacity;
 }
 .bgItem.bgActive {
@@ -421,7 +421,7 @@
   box-sizing: border-box;
   opacity: 0;
   will-change: transform, opacity;
-  transition: 0.3s var(--ease-out-expo);
+  transition: opacity 0.3s var(--ease-out-expo);
 }
 .slide.active .characterImg .mainImg {
   opacity: 1;

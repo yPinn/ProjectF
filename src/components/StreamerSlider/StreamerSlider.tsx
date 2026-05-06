@@ -54,10 +54,10 @@ function StreamerSlider({
     transitionBusy.current = true
     action()
     flashElem.current?.classList.add(styles.flashActive)
-    setTimeout(() => flashElem.current?.classList.remove(styles.flashActive), 200)
+    setTimeout(() => flashElem.current?.classList.remove(styles.flashActive), 100)
     setTimeout(() => {
       transitionBusy.current = false
-    }, 550)
+    }, 350)
   }, [])
 
   useEffect(() => {
@@ -179,6 +179,8 @@ function StreamerSlider({
         </div>
       </header>
 
+      <div ref={flashElem} className={styles.flash} aria-hidden="true" />
+
       <section className={styles.bannerSection}>
         <div className={styles.bannerInner}>
           <div className={styles.bgLayer} aria-hidden="true">
@@ -297,8 +299,6 @@ function StreamerSlider({
             </div>
           ))}
         </div>
-
-        <div ref={flashElem} className={styles.flash} aria-hidden="true" />
 
         <nav className={styles.navThumbs} aria-label="Slide navigation">
           <div className={styles.navThumbsInner}>
