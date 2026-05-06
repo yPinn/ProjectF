@@ -48,7 +48,6 @@ export default function App() {
         verticalText="Fuck Entertainment"
         navItems={NAV_ITEMS}
       />
-
     </>
   )
 }
