@@ -262,7 +262,8 @@
 .hamburger:hover span:last-child {
   transform: translateX(-4px);
 }
-.headerMenu ul li a {
+.headerMenu ul li a,
+.headerMenu ul li span[aria-disabled] {
   position: relative;
   font-size: clamp(var(--text-base), 2vw, var(--text-2xl));
   line-height: var(--lh-snug);
@@ -272,6 +273,10 @@
   text-decoration: none;
   transition: 0.3s var(--ease-out-expo);
   letter-spacing: var(--ls-wide);
+}
+.navDisabled span[aria-disabled] {
+  color: color-mix(in srgb, var(--t1) 30%, transparent);
+  cursor: not-allowed;
 }
 .headerMenu ul li a:hover,
 .headerMenu ul li.active a {

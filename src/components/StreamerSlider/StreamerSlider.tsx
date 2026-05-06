@@ -9,7 +9,14 @@ interface StreamerSliderProps {
   slides: StreamerSlideData[]
   logoUrl?: string
   homeHref?: string
-  navItems?: { label: string; href: string; active?: boolean; target?: string; key?: string }[]
+  navItems?: {
+    label: string
+    href: string
+    active?: boolean
+    disabled?: boolean
+    target?: string
+    key?: string
+  }[]
   verticalText?: string
   autoPlayMs?: number
   audioVolume?: number
@@ -18,7 +25,7 @@ interface StreamerSliderProps {
 
 const DEFAULT_NAV = [
   { label: 'Info', href: '#', active: true },
-  { label: 'Clip', href: '#' },
+  { label: 'Clip', href: '#', disabled: true },
   { label: 'Live', href: '#' },
 ]
 
@@ -150,16 +157,30 @@ function StreamerSlider({
               <nav className={styles.headerMenu}>
                 <ul>
                   {navItems.map((item) => (
-                    <li key={item.label} className={item.active ? styles.active : ''}>
-                      <a
-                        href={
-                          item.key === 'contact' ? (activeSlide.contactUrl ?? item.href) : item.href
-                        }
-                        target={item.target}
-                        rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
-                      >
-                        {item.label}
-                      </a>
+                    <li
+                      key={item.label}
+                      className={[
+                        item.active ? styles.active : '',
+                        item.disabled ? styles.navDisabled : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                    >
+                      {item.disabled ? (
+                        <span aria-disabled="true">{item.label}</span>
+                      ) : (
+                        <a
+                          href={
+                            item.key === 'contact'
+                              ? (activeSlide.contactUrl ?? item.href)
+                              : item.href
+                          }
+                          target={item.target}
+                          rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}
+                        >
+                          {item.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
