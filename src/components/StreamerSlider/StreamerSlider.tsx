@@ -32,7 +32,7 @@ const DEFAULT_NAV = [
 const RAIN_COUNT = 40
 const MAX_GAMES = 4
 const SCROLL_THRESHOLD = 50
-const SCROLL_COOLDOWN = 550
+const SCROLL_COOLDOWN = 360
 
 function StreamerSlider({
   slides,
@@ -92,7 +92,7 @@ function StreamerSlider({
       }, SCROLL_COOLDOWN)
     }
 
-    const handler = (e: WheelEvent) => {
+    const wheelHandler = (e: WheelEvent) => {
       acc += e.deltaY
       if (Math.abs(acc) < SCROLL_THRESHOLD) {
         e.preventDefault()
@@ -104,13 +104,42 @@ function StreamerSlider({
       if ((dir > 0 && cur >= slides.length - 1) || (dir < 0 && cur <= 0)) return
       e.preventDefault()
       if (transitionBusy.current) {
-        pendingDir = dir // last intent wins
+        pendingDir = dir
         return
       }
       trigger(dir)
     }
-    el.addEventListener('wheel', handler, { passive: false })
-    return () => el.removeEventListener('wheel', handler)
+
+    let touchStartY = 0
+    const touchStartHandler = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY
+    }
+    const touchMoveHandler = (e: TouchEvent) => {
+      e.preventDefault()
+    }
+    const touchEndHandler = (e: TouchEvent) => {
+      const deltaY = touchStartY - e.changedTouches[0].clientY
+      if (Math.abs(deltaY) < 60) return
+      const dir = deltaY > 0 ? 1 : -1
+      const cur = currentRef.current
+      if ((dir > 0 && cur >= slides.length - 1) || (dir < 0 && cur <= 0)) return
+      if (transitionBusy.current) {
+        pendingDir = dir
+        return
+      }
+      trigger(dir)
+    }
+
+    el.addEventListener('wheel', wheelHandler, { passive: false })
+    el.addEventListener('touchstart', touchStartHandler, { passive: true })
+    el.addEventListener('touchmove', touchMoveHandler, { passive: false })
+    el.addEventListener('touchend', touchEndHandler, { passive: true })
+    return () => {
+      el.removeEventListener('wheel', wheelHandler)
+      el.removeEventListener('touchstart', touchStartHandler)
+      el.removeEventListener('touchmove', touchMoveHandler)
+      el.removeEventListener('touchend', touchEndHandler)
+    }
   }, [slides.length, goNext, goPrev, triggerFlash])
 
   const navWin = Math.min(5, slides.length)

@@ -990,19 +990,38 @@ img.gameIcon {
   }
 
   .slide {
+    padding-top: 54vh;
+    padding-bottom: calc(var(--ss-bar-h) + var(--space-8));
+    padding-left: var(--ss-left-edge);
     padding-right: var(--ss-left-edge);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
   }
 
-  /* Character image becomes a low-opacity background watermark */
   .characterImg {
     position: absolute;
-    inset: 0;
+    top: calc(var(--ss-bar-h) + var(--ss-header-h) + 2rem);
+    left: 0;
+    right: 0;
+    height: 44vh;
     z-index: 0;
-    opacity: 0.18;
+    opacity: 0.9;
+  }
+
+  .characterImg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      color-mix(in srgb, var(--ss-bg) 95%, transparent) 85%
+    );
+    z-index: 1;
     pointer-events: none;
   }
 
-  /* Content takes full slide width, above the background image */
   .content {
     position: relative;
     z-index: 1;
@@ -1012,6 +1031,8 @@ img.gameIcon {
   .content h1 {
     white-space: normal;
     word-break: break-word;
+    font-size: clamp(1.4rem, 7vw, 2.5rem);
+    margin-bottom: var(--space-4);
   }
 
   .infoBox {
