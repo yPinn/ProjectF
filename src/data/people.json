@@ -70,6 +70,26 @@
     "audio": "/audio/datou_cheng.mp3"
   },
   {
+    "username": "jenijeniiii",
+    "photo": "/images/members/jenijeniiii.png",
+    "section": "slider",
+    "title": "法克娛樂 大鼻子烏龜",
+    "color": "#7FCDCD",
+    "bio": "本名幫幫主，人美心善又會下廚，專業免費保鑽。漂亮到讓人覺得不公平，但她自己完全知道——臉就是她最順手的武器，很喜歡亂用臉。一開口台語，整個氣場直接變派，那種派不是裝出來的，是骨子裡就有的。法克娛樂裡最讓人又愛又怕的姊姊。",
+    "tags": ["Apex Legends", "Valorant"],
+    "audio": "/audio/jenijeniiii.mp3"
+  },
+  {
+    "username": "Ludi",
+    "photo": "/images/members/Ludi.png",
+    "section": "slider",
+    "title": "法克娛樂 真的是一隻貓",
+    "color": "#FF7F6B",
+    "bio": "李傑尼的貓:Ludi。",
+    "tags": [],
+    "audio": "/audio/Ludi.mp3"
+  },
+  {
     "username": "coolhomophonic",
     "photo": "/images/members/coolhomophonic.png",
     "section": "slider",
