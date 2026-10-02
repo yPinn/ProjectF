@@ -160,15 +160,15 @@
     "audio": "/audio/yunayunayunaaaaaa.mp3"
   },
   {
-    "username": "clown2486",
-    "photo": "/images/members/clown2486.png",
-    "section": "slider",
-    "title": "法克娛樂 外交官",
-    "color": "#e34c32",
-    "bio": "你好, 可以叫我小豪或馬來糕，來自馬來西亞 (不是馬來人），沒有技術!沒有技術!沒有技術! 打游戲開心爲主。",
-    "tags": ["Counter-Strike 2", "APEX"],
-    "audio": "/audio/clown2486.mp3"
-  }, 
+  "username": "clown2486",
+  "photo": "/images/members/clown2486.png",
+  "section": "slider",
+  "title": "法克娛樂 外交官",
+  "color": "#e34c32",
+  "bio": "來自馬來西亞（不是馬來人），叫我小豪或馬來糕都行，反正他聽到的時候大概正在罵人。什麼遊戲都玩、什麼遊戲都菜，主場是 CS2 與 APEX，技術？他自己第一個承認沒有，打得開心就好，輸了也是開心。開台口無遮攔，粗口一句接一句，圖奇哪天直接送他一張 BAN 單也不意外。打遊戲時面無表情是他的出廠設定，不是生氣，真的不是。耳機裡永遠有音樂在轉，是這個火藥桶身上唯一安靜的地方。喜歡的歡迎上車一起同樂，不喜歡的請直走左轉，去看你喜歡的主播，謝謝慢走。",
+  "tags": ["Counter-Strike 2", "Apex Legends", "Music"],
+  "audio": "/audio/clown2486.mp3"
+  },
   {
     "username": "luming1228",
     "photo": "/images/members/luming1228.png",
