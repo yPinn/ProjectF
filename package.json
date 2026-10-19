@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "dev:cf": "wrangler pages dev -- vite",
+    "dev:api": "wrangler pages dev dist --ip 127.0.0.1 --port 8788 --show-interactive-dev-session=false",
+    "test:clips": "node scripts/test-clips.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",

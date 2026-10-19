@@ -22,6 +22,7 @@ async function fetchNewToken(env: Env): Promise<string> {
   const now = Date.now()
   const res = await fetch('https://id.twitch.tv/oauth2/token', {
     method: 'POST',
+    signal: AbortSignal.timeout(10000),
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
       client_id: env.TWITCH_CLIENT_ID,
@@ -29,7 +30,15 @@ async function fetchNewToken(env: Env): Promise<string> {
       grant_type: 'client_credentials',
     }),
   })
+  if (!res.ok) throw new Error('Twitch authentication unavailable')
   const data = (await res.json()) as { access_token: string; expires_in: number }
+  if (
+    typeof data.access_token !== 'string' ||
+    !data.access_token ||
+    !Number.isFinite(data.expires_in) ||
+    data.expires_in <= 0
+  )
+    throw new Error('Invalid Twitch authentication response')
   tokenCache = { value: data.access_token, expiresAt: now + data.expires_in * 1000 }
   return data.access_token
 }
