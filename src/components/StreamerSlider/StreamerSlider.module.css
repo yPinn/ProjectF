@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Insomnia';
-  src: url('/fonts/Insomnia.ttf') format('truetype');
+  src: url('/fonts/Insomnia.woff2') format('woff2');
   font-display: swap;
 }
 @font-face {
   font-family: 'VALORANT';
-  src: url('/fonts/Valorant.ttf') format('truetype');
+  src: url('/fonts/Valorant.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -16,6 +16,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  min-height: 720px;
   overflow: hidden;
   background: var(--ss-bg);
   font-family: 'VALORANT', sans-serif;
@@ -222,6 +223,7 @@
 
 .headerMenu ul {
   display: flex;
+  align-items: center;
   gap: var(--space-10);
   justify-content: flex-end;
   list-style: none;
@@ -263,8 +265,12 @@
   transform: translateX(-4px);
 }
 .headerMenu ul li a,
+.headerMenu ul li button,
 .headerMenu ul li span[aria-disabled] {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: clamp(var(--text-base), 2vw, var(--text-2xl));
   line-height: var(--lh-snug);
   font-weight: var(--fw-medium);
@@ -279,6 +285,8 @@
   cursor: not-allowed;
 }
 .headerMenu ul li a:hover,
+.headerMenu ul li button:hover,
+.headerMenu ul li.active button,
 .headerMenu ul li.active a {
   color: var(--ss-accent);
 }
@@ -289,14 +297,7 @@
   left: 50%;
   display: block;
   background-color: var(--ss-accent);
-  mask-image: url('https://www.yudiz.com/codepen/valorant-characters/menu-hover-icon.svg');
-  mask-size: cover;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-image: url('https://www.yudiz.com/codepen/valorant-characters/menu-hover-icon.svg');
-  -webkit-mask-size: cover;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
   width: 70px;
   height: 70px;
   transform: translate(-50%, 30px);
@@ -439,19 +440,6 @@
   transform: translate(var(--px, 0px), var(--py, 0px));
   will-change: transform;
 }
-.parallaxLayer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--photo-url) no-repeat center / contain;
-  transform: translateX(-1rem);
-  filter: saturate(0) contrast(3) brightness(0.25) blur(5px) drop-shadow(0 0 20px var(--ss-accent));
-  opacity: 0.75;
-  pointer-events: none;
-  z-index: -1;
-  transition: filter 0.6s var(--ease-out-expo);
-}
-
 .characterImg img {
   width: 100%;
   height: 100%;
@@ -484,8 +472,8 @@
   text-transform: uppercase;
   margin: 0 0 var(--space-3);
 }
-.content h1 {
-  font-family: 'Insomnia', sans-serif;
+.content h2 {
+  font-family: var(--font-display), var(--font-body);
   font-size: clamp(1.5rem, 3.5vw, 4.5rem);
   font-weight: var(--fw-regular);
   line-height: var(--lh-tight);
@@ -561,7 +549,7 @@
   object-fit: cover;
   object-position: top center;
 }
-.infoBoxContent h5 {
+.infoBoxContent h3 {
   font-family: var(--font-body);
   font-size: var(--text-lg);
   font-weight: var(--fw-bold);
@@ -585,7 +573,8 @@
 
 /* ── Games grid ── */
 .gamesGrid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-4);
   margin: 0 0 var(--space-7);
   align-self: stretch;
@@ -602,11 +591,15 @@
 .gameImg {
   padding: var(--space-3);
   text-align: center;
+  height: clamp(68px, 7vw, 112px);
+  display: grid;
+  place-items: center;
 }
 .gameIcon {
   display: block;
-  aspect-ratio: 1 / 1;
   width: 100%;
+  height: 100%;
+  max-height: 88px;
   margin: 0 auto;
 }
 span.gameIcon {
@@ -1028,7 +1021,7 @@ img.gameIcon {
     width: 100%;
   }
 
-  .content h1 {
+  .content h2 {
     white-space: normal;
     word-break: break-word;
     font-size: clamp(1.4rem, 7vw, 2.5rem);
@@ -1042,5 +1035,193 @@ img.gameIcon {
   .ctaBtn {
     --width: 100%;
     --height: 3rem;
+  }
+}
+
+.audioHint {
+  position: absolute;
+  bottom: -24px;
+  left: 0;
+  width: 100%;
+  font: 12px/1.5 var(--font-body);
+  color: var(--ss-hi);
+}
+.handle {
+  overflow-wrap: anywhere;
+  letter-spacing: 0.12em;
+}
+.content h2 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  flex-shrink: 0;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--ss-hi);
+}
+.headerMenu ul li a::after {
+  display: none;
+}
+.infoBoxContent {
+  min-width: 0;
+}
+.infoBoxContent p {
+  color: var(--ss-hi);
+}
+
+.description {
+  width: 100%;
+  flex-shrink: 0;
+}
+.headerMenu ul li button {
+  cursor: pointer;
+}
+.root.clipMode {
+  height: auto;
+}
+.clipMode .bannerSection,
+.clipMode .bannerInner {
+  position: relative;
+  inset: auto;
+  overflow: visible;
+}
+.clipMode .slide {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+}
+.clipMode .content {
+  min-width: 402px;
+}
+
+@media (max-width: 900px) {
+  .root {
+    height: auto;
+    min-height: 100svh;
+    padding: 90px 24px 28px;
+    font-size: 16px;
+    touch-action: pan-y pinch-zoom;
+  }
+  .bar {
+    display: none;
+  }
+  .header {
+    top: 0;
+    height: 76px;
+    padding: 16px 24px;
+  }
+  .container {
+    padding: 0;
+  }
+  .headerInner {
+    height: 44px;
+    gap: 16px;
+  }
+  .headerLogo {
+    width: 44px;
+    height: 44px;
+  }
+  .headerMenu {
+    padding: 0;
+  }
+  .headerMenu ul {
+    gap: 16px;
+    align-items: center;
+  }
+  .headerMenu ul li a,
+  .headerMenu ul li button,
+  .headerMenu ul li span[aria-disabled] {
+    font-size: 14px;
+  }
+  .headerMenu ul li a::after {
+    display: none;
+  }
+  .bannerSection,
+  .bannerInner {
+    position: relative;
+    inset: auto;
+    overflow: visible;
+  }
+  .slide {
+    position: relative;
+    inset: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+  }
+  .verticalLabel {
+    display: none;
+  }
+  .characterImg {
+    position: relative;
+    flex: none;
+    top: auto;
+    left: auto;
+    right: auto;
+    height: 330px;
+    opacity: 1;
+  }
+  .characterImg::after {
+    display: none;
+  }
+  .characterImg .mainImg {
+    padding: 0 8% 16px;
+  }
+  .content {
+    width: 100%;
+    flex: none;
+  }
+  .clipMode .content {
+    min-width: 0;
+  }
+  .clipMode .slide {
+    min-height: 0;
+  }
+  .content h2 {
+    font-size: clamp(28px, 6vw, 42px);
+    margin-bottom: 20px;
+  }
+  .handle {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .infoBox {
+    height: auto;
+    padding: 20px;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .infoBoxImg {
+    width: 44px;
+    height: 44px;
+  }
+  .infoBoxContent h3 {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .infoBoxContent p {
+    font-size: 15px;
+    line-height: 1.85;
+    display: block;
+    overflow: visible;
+  }
+  .gamesGrid {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .gameImg {
+    padding: 10px;
+  }
+  .gameItem p {
+    font-size: 11px;
+  }
+  .ctaBtn {
+    --width: 100%;
+    --height: 50px;
+    font-size: 18px;
+  }
+  .navThumbs {
+    display: none;
   }
 }

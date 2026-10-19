@@ -93,6 +93,7 @@ export default function Cursor({
     const gl = (canvas.getContext('webgl') ||
       canvas.getContext('experimental-webgl')) as WebGLRenderingContext
     if (!gl) return
+    document.documentElement.dataset.customCursor = ''
 
     const mkShader = (src: string, type: number) => {
       const s = gl.createShader(type)!
@@ -303,6 +304,7 @@ export default function Cursor({
     document.addEventListener('visibilitychange', onVisibility)
 
     return () => {
+      delete document.documentElement.dataset.customCursor
       cancelAnimationFrame(rafId)
       clearTimeout(moveTimer)
       window.removeEventListener('mousemove', onMouse)

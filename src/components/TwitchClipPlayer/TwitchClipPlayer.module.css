@@ -1,0 +1,52 @@
+.panel {
+  width: 100%;
+  margin-bottom: var(--space-4);
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+.player {
+  position: relative;
+  width: 100%;
+  min-height: 302px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--ss-accent);
+  background: #030508;
+}
+.player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.state {
+  min-height: 300px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--ss-accent);
+  background: color-mix(in srgb, var(--ss-accent) 10%, #080b12);
+  color: var(--ss-hi);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+.state p {
+  overflow-wrap: anywhere;
+}
+.state button,
+.state a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid var(--ss-accent);
+  cursor: pointer;
+}
+.state button:hover,
+.state a:hover {
+  background: color-mix(in srgb, var(--ss-accent) 18%, transparent);
+}

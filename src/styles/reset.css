@@ -9,7 +9,7 @@
 html {
   font-size: clamp(8px, 0.833vw, 16px);
   color-scheme: dark;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   tab-size: 4;
@@ -149,10 +149,10 @@ textarea,
 
 /* ── Cursor ── */
 @media (pointer: fine) {
-  html,
-  *,
-  *::before,
-  *::after {
+  html[data-custom-cursor],
+  html[data-custom-cursor] *,
+  html[data-custom-cursor] *::before,
+  html[data-custom-cursor] *::after {
     cursor: none !important;
   }
 }
@@ -182,6 +182,12 @@ textarea,
 }
 
 /* ── Reduced motion ── */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
