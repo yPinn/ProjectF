@@ -25,6 +25,8 @@ dist-ssr
 
 # Cloudflare Wrangler local state
 .wrangler
+.tools
+.impeccable/review
 
 # Editor directories and files
 .vscode/*

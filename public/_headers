@@ -1,0 +1,4 @@
+/images/optimized/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/fonts/*.woff2
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

@@ -86,6 +86,7 @@ export default function Starfield() {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')!
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     let W = 0,
       H = 0,
@@ -124,7 +125,10 @@ export default function Starfield() {
       W = canvas!.width = window.innerWidth
       H = canvas!.height = window.innerHeight
       stars = LAYERS.flatMap((_, li) =>
-        Array.from({ length: LAYERS[li].count }, () => makeStar(li)),
+        Array.from(
+          { length: Math.round(LAYERS[li].count * (window.innerWidth < 768 ? 0.45 : 1)) },
+          () => makeStar(li),
+        ),
       )
     }
 
@@ -133,7 +137,9 @@ export default function Starfield() {
 
       for (const s of stars) {
         s.twinkle += s.twinkleSpd
-        s.alpha += (s.baseAlpha * (0.75 + 0.25 * Math.sin(s.twinkle)) - s.alpha) * 0.06
+        s.alpha = motion.matches
+          ? s.baseAlpha
+          : s.alpha + (s.baseAlpha * (0.75 + 0.25 * Math.sin(s.twinkle)) - s.alpha) * 0.06
 
         const pf = [0.02, 0.06, 0.14][s.layer]
         const dx = s.x
@@ -156,7 +162,7 @@ export default function Starfield() {
       }
 
       ctx.globalAlpha = 1
-      rafId = requestAnimationFrame(draw)
+      if (!motion.matches && !document.hidden) rafId = requestAnimationFrame(draw)
     }
 
     const onScroll = () => {
@@ -167,13 +173,14 @@ export default function Starfield() {
       resizeTimer = setTimeout(init, 150)
     }
     const onVisibility = () => {
-      if (document.hidden) cancelAnimationFrame(rafId)
-      else rafId = requestAnimationFrame(draw)
+      cancelAnimationFrame(rafId)
+      if (!document.hidden) draw()
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
     document.addEventListener('visibilitychange', onVisibility)
+    motion.addEventListener('change', onVisibility)
     init()
     rafId = requestAnimationFrame(draw)
 
@@ -183,6 +190,7 @@ export default function Starfield() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', onVisibility)
+      motion.removeEventListener('change', onVisibility)
     }
   }, [])
 

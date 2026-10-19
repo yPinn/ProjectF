@@ -29,11 +29,23 @@ export interface StreamerGame {
   raw?: boolean
 }
 
+export interface TwitchClip {
+  id: string
+  title: string
+  viewCount: number
+  url: string
+}
+
 export interface StreamerSlideData {
   id: string
   backgroundImage?: string
   navThumbnail: string
   photo: string
+  preview?: string
+  photoWidth?: number
+  photoHeight?: number
+  previewWidth?: number
+  missingPhoto?: boolean
   handle: string
   name: string
   category: string
