@@ -2,7 +2,7 @@ export interface Streamer {
   username: string
   /** Populated at runtime from Twitch display_name; falls back to username */
   name?: string
-  photo?: string
+  photo?: string | null
   color: string
   tags: string[]
   section: 'slider'

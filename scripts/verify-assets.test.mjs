@@ -44,9 +44,9 @@ test('all portrait variants and the UI font stay inside loading budgets', () => 
   assert.ok(statSync(local(manifest.logo)).size < 80 * 1024)
 })
 
-test('account rename reaches generated media and contact settings', () => {
-  const ids = people.map((p) => p.username)
-  assert.ok(ids.includes('lulumin1228'))
-  assert.ok(!ids.includes('luming1228'))
-  assert.ok(Object.hasOwn(readJson('links.json').discord, 'lulumin1228'))
+test('contact settings reference only current roster members', () => {
+  const ids = new Set(people.map((person) => person.username))
+  for (const username of Object.keys(readJson('links.json').discord)) {
+    assert.ok(ids.has(username), `Contact references unknown member: ${username}`)
+  }
 })

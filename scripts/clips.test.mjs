@@ -1,7 +1,15 @@
 import { test, beforeEach, afterEach } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { onRequest } from '../.tools/clip-tests/clips.js'
 
+const people = JSON.parse(readFileSync(new URL('../src/data/people.json', import.meta.url), 'utf8'))
+const usernames = people.map((person) => person.username)
+const testUsername = usernames[0]
+let unlistedUsername = 'unlisted_member'
+for (let index = 0; usernames.includes(unlistedUsername); index++) {
+  unlistedUsername = `unlisted_${index}`
+}
 const originalFetch = globalThis.fetch
 const originalCaches = globalThis.caches
 const env = { TWITCH_CLIENT_ID: 'test-client', TWITCH_CLIENT_SECRET: 'test-secret' }
@@ -32,7 +40,7 @@ beforeEach(() => {
     if (url.hostname === 'id.twitch.tv')
       return Response.json({ access_token: 'test-token', expires_in: 3600 })
     if (url.pathname === '/helix/users')
-      return Response.json({ data: [{ id: '12345', login: 'winsyi' }] })
+      return Response.json({ data: [{ id: '12345', login: url.searchParams.get('login') }] })
     if (url.pathname === '/helix/clips') return Response.json({ data: clipData })
     throw new Error(`Unexpected outbound URL: ${url.origin}${url.pathname}`)
   }
@@ -42,7 +50,7 @@ afterEach(() => {
   globalThis.caches = originalCaches
 })
 
-function request(username = 'winsyi', options = {}) {
+function request(username = testUsername, options = {}) {
   return onRequest({
     request: new Request(
       `https://site.example/api/clips?username=${encodeURIComponent(username)}`,
@@ -59,22 +67,24 @@ test('rejects unknown members before contacting Twitch', async () => {
   assert.equal(calls.length, 0)
 })
 
-test('uses the renamed Twitch login and rejects the old login', async () => {
-  const response = await request('lulumin1228')
-  assert.equal(response.status, 200)
-  const userCall = calls.find((url) => url.pathname === '/helix/users')
-  assert.equal(userCall.searchParams.get('login'), 'lulumin1228')
+test('uses every configured Twitch login and rejects unlisted logins', async () => {
+  assert.ok(usernames.length > 0)
+  for (const username of usernames) {
+    assert.equal((await request(username)).status, 200, username)
+    const userCall = calls.findLast((url) => url.pathname === '/helix/users')
+    assert.equal(userCall.searchParams.get('login'), username)
+  }
   const count = calls.length
-  assert.equal((await request('luming1228')).status, 400)
+  assert.equal((await request(unlistedUsername)).status, 400)
   assert.equal(calls.length, count)
 })
 test('only accepts GET', async () => {
-  assert.equal((await request('winsyi', { method: 'POST' })).status, 405)
+  assert.equal((await request(testUsername, { method: 'POST' })).status, 405)
   assert.equal(calls.length, 0)
 })
 test('missing Twitch settings returns 503 without outbound requests', async () => {
   const response = await onRequest({
-    request: new Request('https://site.example/api/clips?username=winsyi'),
+    request: new Request(`https://site.example/api/clips?username=${testUsername}`),
     env: {},
     waitUntil: (promise) => pending.push(promise),
   })

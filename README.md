@@ -1,25 +1,22 @@
-# 專案維護
+# 法克娛樂｜網站編輯指南
 
-這是 React + Vite 網站，部署至 Cloudflare Pages。後續換圖只需更新原圖與設定，標準建置會自動驗證、轉檔及更新圖片版本。
+日常更新可直接在 GitHub 網頁完成，不需要安裝程式或輸入指令。
 
-```powershell
-npm ci
-npm run build
-npm run preview
-```
+## 先選擇要做的事
 
-Cloudflare Pages：production branch 為 `main`、根目錄為儲存庫根目錄（留空）、build command 為 `npm run build`、輸出目錄為 `dist`。Node 由 `.node-version` 指定 22；若後台另有 `NODE_VERSION`，須與其一致。不要將 build command 改成只執行 `vite build`，那會略過資料與圖片驗證。
+| 我要更新                             | 操作說明                                            |
+| ------------------------------------ | --------------------------------------------------- |
+| 稱號、介紹、主題色、遊戲、聯絡網址   | [編輯成員資料](docs/editor/members.md)              |
+| 換照片、語音或 Logo                  | [更新圖片與語音](docs/editor/assets.md)             |
+| 新增成員、改帳號、調整順序、移除成員 | [管理成員名單](docs/editor/members.md#管理成員名單) |
+| 儲存變更、確認網站更新、處理失敗     | [儲存與確認發布](docs/editor/publish.md)            |
 
-平常修改的檔案：
+## 每次更新的順序
 
-| 內容                                               | 來源                                                     |
-| -------------------------------------------------- | -------------------------------------------------------- |
-| 成員 Twitch 帳號、照片路徑、介紹、色彩、遊戲、語音 | `src/data/people.json`                                   |
-| Discord 聯絡網址                                   | `src/data/links.json`，key 與 username 相同              |
-| 人物原圖                                           | `public/images/members/`                                 |
-| Logo／遊戲原圖                                     | `public/images/logo.png`、`public/images/games/*.png`    |
-| 自動生成、不手改                                   | `src/data/assets.json`、`public/images/optimized/*.webp` |
+1. 開啟 [GitHub 專案](https://github.com/yPinn/ProjectF)，確認檔案列表上方的分支選單是 **main**。
+2. 按上表的說明修改；需要新圖片或語音時，**先上傳檔案，再修改資料中的路徑**。
+3. 按「儲存與確認發布」完成檢查。**main 每次儲存都可能自動更新正式網站。**
 
-帳號已改為 `lulumin1228`。帳號變更需同步更新 people 的 username、links 的 key；照片／語音路徑必須指向真實檔案，檔名不一定要等於帳號。Twitch API、直播與 Clip 會從 people 自動取用新帳號，不另維護名單。
+照片與縮圖會自動產生，不用自行轉成 WebP，也不要修改 `src/data/assets.json` 或 `public/images/optimized/`。
 
-詳細規則、錯誤處理、驗證及 API 本機啟動方式見 [維護與建置說明](scripts/README.md)。
+工程人員的本機指令、建置設定及 Twitch 設定，請看 [技術補充](scripts/README.md)。

@@ -1,5 +1,59 @@
 # 實況主展示入口與載入效能優化
 
+## select none 完整排查與管理員更新流程（2026-10-20）
+
+使用者授權完整檢查後 commit，並要求精簡、依作業流程分類的管理說明。補充要求非技術人員能照做：README 作為入口，docs/editor 按成員、素材、儲存發布拆檔，scripts/README 保留工程補充；本輪不推送。
+
+- [x] 盤點展示台、縮圖、操作按鈕、詳細頁、Logo、圖片拖曳及觸控／鍵盤設定，確認 README 現況。
+- [x] 補齊互動區選取限制、WebKit 對應屬性與目前掛載圖片的原生拖曳防護，保留一般文字閱讀／選取。
+- [x] README 作為任務入口，編輯文件明確列出檔案、操作、修改範例、儲存與發布確認，涵蓋新增／改名／移除、圖片與語音更新。
+- [x] 讓 photo 型別支援 null，Clip／聯絡設定測試依當前名單驗證，避免合法改名或移除被舊帳號測試誤判。
+- [x] 完成桌機／手機行為檢查、建置、格式、lint 與程式碼／文件審查，記錄實際範圍。
+- [x] 分類提交介面修正及文件，確認工作目錄乾淨。
+
+### 完整排查與管理文件 Review
+
+- 選取範圍：舞台與其子元素、操作按鈕、縮圖、詳細頁及 Logo；補 WebKit 對應屬性，人物、Logo 與原生遊戲圖片均不可原生拖曳。About 等一般閱讀文字仍可選取，未新增阻擋垂直捲動的事件。
+- 1440×1000：Ctrl+A 後舞台／控制項沒有藍色反白，舞台可選取子元素為 0、可選取按鈕為 0，已掛載圖片 draggable 均為 false。方向鍵切人、縮圖、查看介紹、Tab 焦點、Info／Clip 切換正常；Clip 不顯示遊戲。
+- 390×844：無橫向溢出，舞台及詳細頁 touch-action 保留 pan-y pinch-zoom。檢查的是瀏覽器手機尺寸及樣式，未測 Safari 實機長按／觸控手勢。
+- UI 驗收截圖：`.impeccable/review/selection-audit-all.png`（全選），`selection-audit-clean.png`（完整正常展示台）；截圖不納入 Git。
+- README 只保留操作入口；docs/editor/members.md、assets.md、publish.md 分別說明成員、素材及儲存發布。已補具體檔案連結、鉛筆／上傳操作、範例、逗號與 null、main 發布效果、PR 及權限處理；工程指令留在 scripts/README。
+- 35 個本機文件連結／錨點、JSON 範例、新成員插在最前面的文字操作及 contact 插入範例全部通過檢查；GitHub／Cloudflare 按鈕與部署說明參考官方文件。
+- 正式 build、素材測試 12/12、Clip mock 測試 9/9、lint、全專案 format:check、diff --check 通過。未額外執行真實 Twitch API／Cloudflare 發布；素材與 Clip 的安全錯誤測試仍保留。
+- 程式碼／文件審查 APPROVE，無必修問題。photo 型別與 null 備援一致，測試已依名單動態驗證，不限制某位成員必須永久存在。
+- 已分兩筆提交：79369b4 為選取／拖曳修正，後一筆為編輯指南及名單驗證同步；提交後工作目錄乾淨。本輪沒有推送或發布。
+
+## Jenny 新照片恢復與重新上傳（2026-10-20）
+
+使用者要求修復後重新上傳，並指出舊吉他照片不是目標。已查到 f8bad628 的另一張新照片，恢復新圖並單獨提交照片素材。
+
+- [x] 遍歷 Git 中不同 Jenny 圖片 blob，確認新圖 1108×1189、2,770,849 bytes 可完整解碼。
+- [x] 以新圖恢復目前 people.photo 指定的 jenijeniiii1.png，保留透明度與圖片內容。
+- [x] 重建與測試，確認新來源雜湊、生成圖片及容量預算。
+- [x] 單獨提交照片與生成素材：5d55c8e，僅 8 個照片／manifest 檔案，未包含待提交的 select none 修正。
+- [x] 使用者已明確同意推送至 GitHub yPinn/ProjectF 的 main；git push origin 5d55c8e:refs/heads/main 成功，ls-remote 確認遠端為 5d55c8ec08b50cc921d615e22b5a375b855cbe46。
+
+### Jenny 新圖恢復 Review
+
+- 新圖來自 f8bad628 的 blob 5c58d5b0883f01a2608b8ab35c24348ebd147615，1108×1189、PNG、2,770,849 bytes；完整解碼成功，保留原有透明背景與像素。
+- 新大圖 URL 使用 jenijeniiii-portrait.3b6483238691173d.webp，preview 與 thumbnail 同步更新，未更動成員資料設定路徑。
+- 正式建置與素材測試 12/12 通過。原先判定只有空檔不能恢復的說法不完整：空檔本身不可還原，但中間的新上傳版本仍保存在 Git，可直接恢復。
+- 原推送曾因缺少目的地的明確授權而遭自動核准拒絕；取得使用者同意後成功推送。照片已重新上傳 GitHub，Cloudflare 正式部署狀態尚未查核。
+
+## 展示台 select none 修正（2026-10-20）
+
+- [x] 確認背景文字僅設 pointer-events: none，展示台缺少 user-select 限制；人像元件已有 draggable=false。
+- [x] 對展示台及其子元素加入 WebKit／標準 user-select: none，舞台人像補上 WebKit 原生拖曳限制。
+- [x] 驗證瀏覽器選取行為、選人與方向鍵／手機捲動設定；完成建置與程式碼審查。
+
+### select none Review
+
+- 1440×1000：鍵盤全選後，展示台背景字與人物未出現藍色反白；其他標題／文案仍可選取。舞台與全部子元素 computed user-select 均為 none。
+- 舞台人物圖片 computed -webkit-user-drag 為 none，全部人像 draggable 屬性仍為 false；方向鍵從 sunsun_pumpkin 正常切換到 puffsla，縮圖可切回。
+- 390×844：user-select 為 none，touch-action 保留 pan-y pinch-zoom，無橫向溢出；未新增 touch preventDefault。未宣稱已驗證 Safari 實機長按，WebKit 對應屬性已補上。
+- 正式建置、修改檔 Prettier、diff --check 通過，程式碼審查 APPROVE。
+- 初次全選驗證截圖 `.impeccable/review/roster-select-none.png`，正常畫面 `roster-select-none-clean.png`；本次完整排查後一併提交，未推送或部署。
+
 ## Info 描述框與 brief 字數（2026-10-20）
 
 使用者要求適度增加描述框容量並提供 brief 字數範圍；沿用現有視覺，僅調整 Info 描述與必要的短視窗容納，Clip 排列維持原樣。
