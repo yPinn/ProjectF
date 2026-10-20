@@ -55,7 +55,7 @@ export default function StreamerSlider({ slides, current, onSelect }: Props) {
       ref={rootRef}
       tabIndex={-1}
       aria-label="實況主介紹，使用左右方向鍵切換人物"
-      className={`${styles.root}${view === 'clip' ? ` ${styles.clipMode}` : ''}`}
+      className={`${styles.root} ${view === 'clip' ? styles.clipMode : styles.infoMode}`}
       style={{ '--ss-accent': activeSlide.accentColor ?? '#826dff' } as CSSProperties}
       {...input}
     >

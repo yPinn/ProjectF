@@ -24,11 +24,13 @@ const TAG_ICONS: Record<string, TagEntry> = {
   Ferrari: assetData.games.ferrari,
 }
 
-const BIO_MAX_CHARS = 200
+// Briefs read best at 120–180 characters; leave a little room for extended profiles.
+const BIO_MAX_CHARS = 220
 
 export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => {
   const asset = assetData.members[s.username as keyof typeof assetData.members]
   const photo = asset?.photo ?? assetData.logo
+  const bio = Array.from(s.bio.trim())
   return {
     id: s.username,
     accentColor: s.color,
@@ -42,7 +44,7 @@ export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => {
     handle: `@${s.username}`,
     name: s.username,
     category: s.title,
-    bio: s.bio.length > BIO_MAX_CHARS ? s.bio.slice(0, BIO_MAX_CHARS) + '…' : s.bio,
+    bio: bio.length > BIO_MAX_CHARS ? bio.slice(0, BIO_MAX_CHARS).join('') + '…' : bio.join(''),
     games: s.tags
       .filter((tag) => TAG_ICONS[tag])
       .slice(0, 4)

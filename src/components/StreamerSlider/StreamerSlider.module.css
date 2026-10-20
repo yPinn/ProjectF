@@ -34,7 +34,7 @@
   --ss-bottom-info-h: 3rem; /* 48px */
   --ss-avatar-size: 3.125rem; /* 50px */
   --ss-nav-thumb-size: var(--ss-left-col); /* 60px, 與 logo 同尺寸 */
-  --ss-info-box-h: 10.25rem; /* 164px */
+  --ss-info-box-min-h: clamp(168px, 12rem, 208px);
   --ss-corner-inset: -3px;
 
   --t1: #ccc4ed;
@@ -506,7 +506,8 @@
   display: flex;
   gap: var(--space-4);
   margin: 0 0 var(--space-4);
-  height: var(--ss-info-box-h);
+  height: auto;
+  min-height: var(--ss-info-box-min-h);
   overflow: hidden;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -551,7 +552,7 @@
 }
 .infoBoxContent h3 {
   font-family: var(--font-body);
-  font-size: var(--text-lg);
+  font-size: clamp(14px, var(--text-lg), 18px);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-wide);
@@ -560,15 +561,12 @@
 }
 .infoBoxContent p {
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: clamp(12px, var(--text-sm), 14px);
   font-weight: var(--fw-regular);
-  line-height: var(--lh-relaxed);
+  line-height: 1.7;
   color: var(--ss-lo);
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow-wrap: anywhere;
 }
 
 /* ── Games grid ── */
@@ -1093,6 +1091,26 @@ img.gameIcon {
   min-width: 402px;
 }
 
+@media (min-width: 901px) {
+  .infoMode {
+    height: auto;
+  }
+  .infoMode .bannerSection,
+  .infoMode .bannerInner {
+    position: relative;
+    inset: auto;
+    overflow: visible;
+  }
+  .infoMode .slide {
+    position: relative;
+    inset: auto;
+    min-height: max(720px, 100svh);
+  }
+  .infoMode .content {
+    flex-grow: 1.7;
+  }
+}
+
 @media (max-width: 900px) {
   .root {
     height: auto;
@@ -1188,6 +1206,7 @@ img.gameIcon {
   }
   .infoBox {
     height: auto;
+    min-height: 0;
     padding: 20px;
     gap: 14px;
     margin-bottom: 20px;
