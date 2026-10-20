@@ -97,6 +97,12 @@ button {
   border: none;
 }
 
+button,
+button * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* ── Links ── */
 a {
   color: inherit;

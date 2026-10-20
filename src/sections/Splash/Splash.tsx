@@ -78,6 +78,7 @@ export default function Splash() {
           width="512"
           height="512"
           fetchPriority="high"
+          draggable={false}
         />
 
         <div className={styles.tag}>SINCE 2026 ／ TAIWAN</div>

@@ -187,7 +187,12 @@ export default function StreamerSlider({ slides, current, onSelect }: Props) {
                       <div key={game.name} className={styles.gameItem}>
                         <div className={styles.gameImg}>
                           {game.raw ? (
-                            <img src={game.icon} alt={game.name} className={styles.gameIcon} />
+                            <img
+                              src={game.icon}
+                              alt={game.name}
+                              className={styles.gameIcon}
+                              draggable={false}
+                            />
                           ) : (
                             <span
                               className={styles.gameIcon}

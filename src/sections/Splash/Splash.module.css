@@ -76,6 +76,9 @@
 
 .logo {
   display: block;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
   margin: 0 auto var(--space-7);
   height: clamp(100px, 10vw, 120px);
   width: auto;
