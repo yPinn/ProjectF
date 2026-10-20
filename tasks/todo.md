@@ -1,5 +1,52 @@
 # 實況主展示入口與載入效能優化
 
+## 自動素材建置與設定防呆（2026-10-20）
+
+使用者已授權直接修復；標準 build 自動驗證與生成素材，並將帳號改為 lulumin1228。維持原版面與 Clip 行為，未授權推送或部署。
+
+- [x] 確認現有相依、失效原圖、素材引用、設定檔與 API 帳號來源，說明實作方案。
+- [x] 先新增並執行換圖、快取網址、無效圖片／路徑／重複帳號等測試，確認修改前失敗。
+- [x] 安裝並鎖定 sharp；實作自動驗證、內容雜湊素材、建置／開發流程與統一素材引用。
+- [x] 從 Git 恢復有效圖片、更新 lulumin1228 相關設定、修正格式與設定文件。
+- [x] 驗證相同檔名換圖後重建、乾淨環境建置、測試／格式／lint 與預覽；完成程式碼審查。
+- [x] 補充 Review 與操作方法。
+
+### 自動素材建置 Review
+
+- build 與 dev 啟動自動生成素材；sharp 0.35.5 精確鎖定於 package.json／lock，Node 22 設定檔與 Node >=22.12 引擎要求已補上。
+- 人物、縮圖、Logo、遊戲圖示統一由 manifest 讀取內容雜湊 URL；不再被 Twitch 頭像覆蓋。people 與 contacts 改為 lulumin1228；users 請求新增名單版本以避開舊瀏覽器快取，Clip allowlist 由 people 同步。
+- 明確驗證帳號、資料型別、顏色、聯絡網址與來源路徑；原圖缺失／空檔／損壞會停止 build。照片 null／省略才使用替代圖；8 筆缺少語音明確改 null。
+- jenijeniiii1.png 從 dcc634b 的有效原始 PNG 恢復（510,313 bytes），不是生成或替換為新人物；clown2486 新原圖已生成並顯示。
+- 新回歸測試先確認缺少新實作時失敗，完成後素材 12/12、Clip API 9/9 通過。生成模組覆蓋率：lines 98.76%、branches 87.88%、functions 100%，80% 門檻通過。
+- 本機正式建置、ESLint、全專案 format:check 通過。程式碼審查與最終增量複查 APPROVE，無未解決 finding。
+- 在隔離副本移除生成素材與 manifest，使用乾淨 npm ci + npm run build 成功，沒有依賴原有 node_modules。驗證環境為本機 Windows／Node 24，未宣稱已於 Cloudflare Linux 正式部署。
+- 隔離副本同名覆寫 clown2486.png 後執行完整 npm run build，大圖 URL 從 8a96c616ff551da7 變為 ad12052ddb14f84d，三種尺寸均更新，dist 與 JS 引用新圖、舊檔移除；原專案原圖未被此測試改寫。
+- 隔離副本故意寫入僅 CRLF 的假 PNG，完整 build 回傳 1，錯誤包含人物與原圖路徑；不會默默成功並沿用舊圖。
+- 1440×1000 正式預覽驗證 clown2486 的新圖與詳細區同步，圖片自然寬度非零；lulumin1228 顯示新帳號與雜湊圖片，390×844 無橫向溢出。截圖 `.impeccable/review/rebuilt-clown.png`。
+- README.md 與 scripts/README.md 說明新的 Git 換圖／改帳號／null 欄位流程、Cloudflare npm run build + dist 設定及字型維護界線。圖片衍生檔仍沿用版本控制，原圖與 people 才是來源。
+- 修復驗收時尚未提交；使用者後續已授權 commit，本節與修復一併提交。未推送或部署，正式站須取得這批程式修復後，後續 Git 換圖才能套用自動流程。
+
+## Git 更新後正式站未顯示圖片變更：檢查（2026-10-20）
+
+範圍：使用者要求檢查，已確認發生於後續 Git 更新後的 Cloudflare Pages rebuild。本輪只診斷並記錄，未改應用程式、覆寫圖片、提交或部署。
+
+- [x] 比對最新 Git 與前次分類提交，確認原圖／people.json 的更新範圍。
+- [x] 檢查 build、素材來源、轉檔工具相依、輸出目錄、圖片檔案格式與快取。
+- [x] 執行正式建置、素材測試、format:check、lint，並比對正式站公開輸出。
+- [x] 記錄根因、其他問題、修正方向與未能查核的設定。
+
+### Git 更新檢查 Review
+
+- 目前 HEAD 為 `0391409`；後續提交新增 clown2486 原圖、將 jenijeniiii 改指向 jenijeniiii1.png，並修改 clown2486 文案。最佳化圖片與 assets.json 自 `dcc634b` 後未更新。
+- 頁面使用 assets.json 指定的 WebP，build 僅執行 tsc 與 Vite，沒有重新生成素材；sharp 也未列入 package.json。新增 clown2486 原圖後清單仍為 missingPhoto=true，繼續顯示 fallback。
+- `public/images/members/jenijeniiii1.png` 僅 2 bytes，內容為 CRLF，無 PNG 簽章，需有效圖片來源；不可直接將轉檔加入 build，否則會因此失敗。
+- 素材測試 1/2 通過，失敗原因是 missingPhoto 狀態與現有原圖不一致。現有測試只查存在與標記，未解碼圖片，未涵蓋空白假 PNG。
+- `npm run build` 成功；`npm run lint` 及針對 src／functions／MJS 的 ESLint 通過；`npm run format:check` 只回報 people.json 格式警告。JSON 可解析，格式警告不會造成目前 build 忽略更新。
+- 公開正式站 https://fuckent.pages.dev/ 回傳 200，主檔 `/assets/index-B8WDOXD4.js` 與本輪本機 build 檔名相同。正式站 jenijeniiii-portrait.webp 與 fallback-portrait.webp 的 SHA-256 前 16 位分別為 `3f9c6721cba53cd6`、`92d713f9070ff3b3`，與本機未重新生成的素材相同。
+- 正式站 WebP 回應仍是 public, max-age=86400, stale-while-revalidate=604800；同網址換圖後，既有瀏覽器可能繼續用快取，建議素材 URL 採內容版本。
+- wrangler 的輸出目錄 dist 與 Vite 相符。未登入 Cloudflare Dashboard，因此未確認後台 production branch／建置目錄或部署 SHA；不可將公開 JS 檔名比對宣稱為後台設定驗證。
+- 修正方向：補有效圖片，讓 npm run build 以明確相依自動驗證並生成素材，對輸出使用版本化 URL，補充損壞圖片／來源變更測試，最後修正 people.json 格式。文案亦受 200 字顯示上限影響，但本次 clown2486 修改位於可見範圍，不能解釋為被截掉。
+
 ## 分類提交（2026-10-19）
 
 使用者已授權整理並提交目前工作；依相依關係分類，不推送遠端。

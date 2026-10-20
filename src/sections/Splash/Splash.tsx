@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Particles from '@/components/Particles/Particles'
+import assets from '@/data/assets.json'
 import styles from './Splash.module.css'
 
 export default function Splash() {
@@ -72,7 +73,7 @@ export default function Splash() {
       <div ref={contentRef} className={styles.content}>
         <img
           className={styles.logo}
-          src="/images/optimized/logo.webp"
+          src={assets.logo}
           alt="法克娛樂 FUCK Entertainment"
           width="512"
           height="512"

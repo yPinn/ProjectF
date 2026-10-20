@@ -58,6 +58,16 @@ test('rejects unknown members before contacting Twitch', async () => {
   assert.equal(response.status, 400)
   assert.equal(calls.length, 0)
 })
+
+test('uses the renamed Twitch login and rejects the old login', async () => {
+  const response = await request('lulumin1228')
+  assert.equal(response.status, 200)
+  const userCall = calls.find((url) => url.pathname === '/helix/users')
+  assert.equal(userCall.searchParams.get('login'), 'lulumin1228')
+  const count = calls.length
+  assert.equal((await request('luming1228')).status, 400)
+  assert.equal(calls.length, count)
+})
 test('only accepts GET', async () => {
   assert.equal((await request('winsyi', { method: 'POST' })).status, 405)
   assert.equal(calls.length, 0)

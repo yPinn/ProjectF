@@ -5,6 +5,7 @@ import { useAudio } from '@/hooks/useAudio'
 import { useMouseParallax } from '@/hooks/useMouseParallax'
 import Portrait from '@/components/Portrait/Portrait'
 import TwitchClipPlayer from '@/components/TwitchClipPlayer/TwitchClipPlayer'
+import assets from '@/data/assets.json'
 import styles from './StreamerSlider.module.css'
 
 interface Props {
@@ -47,7 +48,7 @@ export default function StreamerSlider({ slides, current, onSelect }: Props) {
 
   if (!activeSlide) return null
   const navStart = Math.max(0, Math.min(current - 2, slides.length - 5))
-  const logoUrl = '/images/optimized/logo.webp'
+  const logoUrl = assets.logo
 
   return (
     <div

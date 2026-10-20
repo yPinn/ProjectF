@@ -8,7 +8,7 @@ export interface Streamer {
   section: 'slider'
   title: string
   bio: string
-  audio: string
+  audio?: string | null
 }
 
 /** Mascot is now merged into Streamer */

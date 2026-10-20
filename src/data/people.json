@@ -27,7 +27,7 @@
     "color": "#CF7B5B",
     "bio": "LOL、Valorant 全都玩，TFT 排陣也有自己一套清晰邏輯，操作與觀念兼具，玩起來總有自己的節奏。作為法克娛樂的公關形象擔當，亮點不只在外型，更在於自然親切的互動感，讓人一進到頻道就能感到自在、願意停留下來。她的存在總能讓氣氛變得更柔和也更有記憶點，不張揚卻十分明顯地，將整個頻道氛圍提升了一個等級。",
     "tags": ["League of Legends", "Valorant", "Teamfight Tactics"],
-    "audio": "/audio/yyo277.mp3"
+    "audio": null
   },
   {
     "username": "sunsun_pumpkin",
@@ -77,7 +77,7 @@
     "color": "#9DBFB0",
     "bio": "本名幫幫主，人美心善又會下廚，專業免費保鑽。漂亮到讓人覺得不公平，但她自己完全知道——臉就是她最順手的武器，很喜歡亂用臉。一開口台語，整個氣場直接變派，那種派不是裝出來的，是骨子裡就有的。法克娛樂裡最讓人又愛又怕的姊姊。",
     "tags": ["Apex Legends", "Valorant"],
-    "audio": "/audio/jenijeniiii.mp3"
+    "audio": null
   },
   {
     "username": "coolhomophonic",
@@ -107,7 +107,7 @@
     "color": "#a8c3d7",
     "bio": "是位充滿哈吉米風格的可愛女實況主，笑聲甜甜超療癒！主玩 Valorant，技術與歡樂兼具，無論精彩擊殺還是搞笑失誤都超圈粉。跟著她一起哈吉米，保證讓你邊看邊笑、心情直接被治癒！用本名的琳疊字加上前面的哈吉米，就是可愛x可愛不是兩倍的可愛是二次方的可愛！",
     "tags": ["Valorant"],
-    "audio": "/audio/hachimi1010.mp3"
+    "audio": null
   },
   {
     "username": "loui61095",
@@ -117,7 +117,7 @@
     "color": "#6c8fff",
     "bio": "嘴上吵得要命、實際上是全場的氣氛核心。人帥、有腹肌，斜槓到讓你不知道該先羨慕哪一塊。效果王不是說說而已——有他在的台，每一段都是highlight。法克娛樂裡那種你以為他在搗亂、結果發現少了他整個台就少了靈魂的人。",
     "tags": ["Valorant", "Apex Legends"],
-    "audio": "/audio/loui61095.mp3"
+    "audio": null
   },
   {
     "username": "yu_er___",
@@ -127,7 +127,7 @@
     "color": "#7ad8e9",
     "bio": "法克娛樂裡最像開盲盒的存在——每天都不一樣，但每天都讓人驚喜。有點呆呆的、講話偶爾不過腦，但那種真實感反而是最可愛的地方。不會硬帶話題，但你說什麼她都認真在聽。隨和、好相處，只要你來陪她玩，她就很開心。沒人來的話會很桑心的，所以來吧。",
     "tags": ["League of Legends", "Valorant"],
-    "audio": "/audio/yu_er___.mp3"
+    "audio": null
   },
   {
     "username": "karicl0",
@@ -137,7 +137,7 @@
     "color": "#0072E3",
     "bio": "這隻貓從不露臉，但總讓人充滿想像，母語是貓語，而且還會人類的多國語言，開台的時候會用人型態，用肉球開槍跟畫圖，偶爾會唱幾首人類的音樂，如果有爆麥安安，通常..是給螞蟻聽的。",
     "tags": ["Valorant", "PUBG", "Minecraft", "Singing"],
-    "audio": "/audio/karicl0.mp3"
+    "audio": null
   },
   {
     "username": "nima_qqq",
@@ -167,16 +167,16 @@
     "color": "#e34c32",
     "bio": "法克娛樂的馬來西亞外交官，穿梭於各個圈子之間，專門負責把法克娛樂的名字帶到更遠的地方。平時其實是個有點害羞的人，但一開台就像直接換了一個人，嘴巴火力全開，粗口與垃圾話毫不手軟，節目效果拉滿到連圖奇都得替他捏把冷汗。人脈廣、交際能力強，遇到陌生人也能自然打成一片，是團隊與外界之間的重要橋樑。法克娛樂能不能交到新朋友、談成新合作，往往就看他的外交手腕有多硬。 ",
     "tags": ["Counter-Strike 2", "Apex Legends", "Music"],
-    "audio": "/audio/clown2486.mp3"
+    "audio": null
   },
   {
-    "username": "luming1228",
-    "photo": "/images/members/luming1228.png",
+    "username": "lulumin1228",
+    "photo": "/images/members/lulumin1228.png",
     "section": "slider",
     "title": "法克娛樂 歌神",
     "color": "#e4c778",
     "bio": "法克娛樂的門面兼公認歌神。極具辨識度與感染力的聲線，總能讓熱鬧的聊天室瞬間安靜，靜靜聆聽這份最高級的聽覺享受。雖然在各類遊戲中實力在線，但只要他開口歌唱，遊戲便成了背景。這把無可取代的好聲音，讓他成為當之無愧的歌神擔當。",
     "tags": ["Singing", "League of Legends", "Apex Legends", "Teamfight Tactics"],
-    "audio": "/audio/luming1228.mp3"
+    "audio": null
   }
 ]

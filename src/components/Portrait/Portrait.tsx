@@ -1,5 +1,6 @@
 import type { ImgHTMLAttributes } from 'react'
 import type { StreamerSlideData } from '@/types'
+import assets from '@/data/assets.json'
 
 interface Props extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'alt'> {
   slide: StreamerSlideData
@@ -28,7 +29,7 @@ export default function Portrait({ slide, thumbnail = false, ...props }: Props) 
         if (img.dataset.fallback) return
         img.dataset.fallback = 'true'
         img.removeAttribute('srcset')
-        img.src = '/images/optimized/logo.webp'
+        img.src = assets.logo
       }}
     />
   )

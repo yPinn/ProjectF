@@ -7,7 +7,12 @@ import prettierConfig from 'eslint-config-prettier'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', '.tools/**', '.wrangler/**']),
+  {
+    files: ['scripts/**/*.mjs'],
+    extends: [js.configs.recommended, prettierConfig],
+    languageOptions: { globals: globals.node },
+  },
   {
     files: ['src/**/*.{ts,tsx}'],
     extends: [

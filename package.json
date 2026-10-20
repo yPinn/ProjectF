@@ -3,12 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
+    "assets:build": "node scripts/optimize-assets.mjs",
+    "predev": "npm run assets:build",
     "dev": "vite",
+    "predev:cf": "npm run assets:build",
     "dev:cf": "wrangler pages dev -- vite",
     "dev:api": "wrangler pages dev dist --ip 127.0.0.1 --port 8788 --show-interactive-dev-session=false",
     "test:clips": "node scripts/test-clips.mjs",
-    "build": "tsc -b && vite build",
+    "test:assets": "node --test scripts/assets.test.mjs scripts/verify-assets.test.mjs",
+    "build": "npm run assets:build && tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -36,6 +43,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "prettier": "^3.8.3",
+    "sharp": "0.35.5",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10",

@@ -9,26 +9,26 @@ const streamersData = peopleData as Streamer[]
 type TagEntry = string | { src: string; raw: true }
 
 const TAG_ICONS: Record<string, TagEntry> = {
-  'League of Legends': '/images/optimized/game-lol.webp',
-  'Apex Legends': '/images/optimized/game-apex.webp',
-  Valorant: '/images/optimized/game-valorant.webp',
-  'Teamfight Tactics': '/images/optimized/game-tft.webp',
-  'Counter-Strike 2': { src: '/images/optimized/game-cs2.webp', raw: true },
-  ETS2: { src: '/images/optimized/game-ets2.webp', raw: true },
-  BMW: '/images/optimized/game-bmw.webp',
-  'Delta Force': '/images/optimized/game-delta.webp',
-  Minecraft: { src: '/images/optimized/game-minecraft.webp', raw: true },
-  'Mahjong Soul': '/images/optimized/game-mahjong.webp',
-  Singing: '/images/optimized/game-singing.webp',
-  PUBG: '/images/optimized/game-pubg.webp',
-  Ferrari: '/images/optimized/game-ferrari.webp',
+  'League of Legends': assetData.games.lol,
+  'Apex Legends': assetData.games.apex,
+  Valorant: assetData.games.valorant,
+  'Teamfight Tactics': assetData.games.tft,
+  'Counter-Strike 2': { src: assetData.games.cs2, raw: true },
+  ETS2: { src: assetData.games.ets2, raw: true },
+  BMW: assetData.games.bmw,
+  'Delta Force': assetData.games.delta,
+  Minecraft: { src: assetData.games.minecraft, raw: true },
+  'Mahjong Soul': assetData.games.mahjong,
+  Singing: assetData.games.singing,
+  PUBG: assetData.games.pubg,
+  Ferrari: assetData.games.ferrari,
 }
 
 const BIO_MAX_CHARS = 200
 
 export const sliderStreamers: StreamerSlideData[] = streamersData.map((s) => {
-  const asset = assetData[s.username as keyof typeof assetData]
-  const photo = asset?.photo ?? '/images/optimized/logo.webp'
+  const asset = assetData.members[s.username as keyof typeof assetData.members]
+  const photo = asset?.photo ?? assetData.logo
   return {
     id: s.username,
     accentColor: s.color,

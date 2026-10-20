@@ -54,9 +54,7 @@ export default function App() {
     () =>
       sliderStreamers.map((slide) => {
         const profile = twitchProfiles[slide.id]
-        return profile
-          ? { ...slide, name: profile.displayName, navThumbnail: profile.profileImageUrl }
-          : slide
+        return profile ? { ...slide, name: profile.displayName } : slide
       }),
     [twitchProfiles],
   )

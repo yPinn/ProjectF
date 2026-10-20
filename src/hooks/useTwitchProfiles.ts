@@ -1,4 +1,13 @@
 import { useState, useEffect } from 'react'
+import people from '@/data/people.json'
+
+// A changed roster must not reuse the browser's previous 24-hour profile response.
+const rosterQuery = new URLSearchParams({
+  v: people
+    .map((person) => person.username)
+    .sort()
+    .join(','),
+})
 
 export interface TwitchProfile {
   profileImageUrl: string
@@ -14,7 +23,7 @@ export function useTwitchProfiles(enabled = true): TwitchProfileMap {
   useEffect(() => {
     if (!enabled) return
     const controller = new AbortController()
-    fetch('/api/users', { signal: controller.signal })
+    fetch(`/api/users?${rosterQuery}`, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data: TwitchProfileMap) => {
         if (!data || typeof data !== 'object' || Array.isArray(data)) return
